@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YBI02R_HFT_2023241.Models
+namespace YBI02R_HFT_2023241.Logic.Classes
 {
-    internal class Model_2
+    internal class ActorLogic
     {
     }
 }
