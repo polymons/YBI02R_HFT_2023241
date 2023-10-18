@@ -8,4 +8,9 @@
     <Folder Include="Interfaces\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\YBI02R_HFT_2023241.Models\YBI02R_HFT_2023241.Models.csproj" />
+    <ProjectReference Include="..\YBI02R_HFT_2023241.Repository\YBI02R_HFT_2023241.Repository.csproj" />
+  </ItemGroup>
+
 </Project>

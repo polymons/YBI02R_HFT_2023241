@@ -5,4 +5,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\YBI02R_HFT_2023241.Models\YBI02R_HFT_2023241.Models.csproj" />
+  </ItemGroup>
+
 </Project>
