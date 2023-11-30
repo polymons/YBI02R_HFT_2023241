@@ -5,12 +5,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="ConsoleMenu-simple" Version="2.4.3" />
+		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+	</ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\YBI02R_HFT_2023241.Models\YBI02R_HFT_2023241.Models.csproj" />
   </ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="ConsoleMenu-simple" Version="2.4.2" />
-	</ItemGroup>
 
 </Project>
