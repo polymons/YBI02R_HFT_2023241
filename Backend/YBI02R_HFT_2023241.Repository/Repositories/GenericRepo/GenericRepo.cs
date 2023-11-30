@@ -4,7 +4,7 @@ using YBI02R_HFT_2023241.Repository.Interfaces;
 
 namespace YBI02R_HFT_2023241.Repository.Repositories.Repo
 {
-    //A class to connect Publishers, Artists and Songs into the context
+
     public abstract class Repo<T> : IRepository<T> where T : class
     {
         protected MusicDbContext _musicDbContext; //protected!
