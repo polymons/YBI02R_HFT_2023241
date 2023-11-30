@@ -17,5 +17,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\YBI02R_HFT_2023241.Models\YBI02R_HFT_2023241.Models.csproj" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Database\Models\" />
+  </ItemGroup>
 
 </Project>
