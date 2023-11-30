@@ -8,7 +8,7 @@ using YBI02R_HFT_2023241.Models;
 
 namespace YBI02R_HFT_2023241.Repository.Database
 {
-    internal class MusicDbContext : DbContext
+    public class MusicDbContext : DbContext
     {
         public virtual DbSet<Artist> Artists { get; set; }
         public virtual DbSet<Song> Songs { get; set; }
