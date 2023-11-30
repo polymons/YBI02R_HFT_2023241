@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,13 +8,6 @@
 	<ItemGroup>
 		<PackageReference Include="ConsoleMenu-simple" Version="2.4.3" />
 		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.17" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.17" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
 	</ItemGroup>
 
   <ItemGroup>
