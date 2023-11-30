@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace YBI02R_HFT_2023241.Models
 {
@@ -14,13 +10,20 @@ namespace YBI02R_HFT_2023241.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int StudioID { get; set; }
+
         [StringLength(2)]
         public string Country { get; set; }
+
         [Required]
         public string StudioName { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<Artist> Artists { get; set; }
 
+        public Publisher()
+        {
+
+        }
         public Publisher(string country, string studioName, int studioID)
         {
             Country = country;
@@ -28,12 +31,6 @@ namespace YBI02R_HFT_2023241.Models
             StudioID = studioID;
             Artists = new HashSet<Artist>();
         }
-
-        public Publisher()
-        {
-
-        }
-
         public Publisher(string country, string studioName)
         {
             Country = country;
