@@ -20,7 +20,6 @@ namespace YBI02R_HFT_2023241.Repository.Repositories.Repo
             _musicDbContext.SaveChanges();
         }
 
-
         #region These will be implemented in the ModelRepos
         public abstract T Read(int id);
 
