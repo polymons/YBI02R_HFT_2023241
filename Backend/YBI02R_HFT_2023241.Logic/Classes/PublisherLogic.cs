@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using YBI02R_HFT_2023241.Logic.Interfaces;
 using YBI02R_HFT_2023241.Models;
 using YBI02R_HFT_2023241.Repository.Interfaces;
@@ -16,6 +12,8 @@ namespace YBI02R_HFT_2023241.Logic
         {
             this.publisherRepo = publisherRepo;
         }
+
+
         #region CRUD methods
         public void Create(Publisher item)
         {
