@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using YBI02R_HFT_2023241.Logic.Interfaces;
-using YBI02R_HFT_2023241.Logic;
 using YBI02R_HFT_2023241.Models;
 using YBI02R_HFT_2023241.Repository.Database;
 using YBI02R_HFT_2023241.Repository.Interfaces;
