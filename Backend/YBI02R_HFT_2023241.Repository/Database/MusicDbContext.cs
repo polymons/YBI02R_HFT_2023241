@@ -91,7 +91,6 @@ namespace YBI02R_HFT_2023241.Repository.Database
                 new Publisher("US", "Ultra Music", "New York", 13), // Corresponding to Sofi Tukker
                 new Publisher("UK", "Domino Recording Company", "Sheffield", 14) // Corresponding to Arctic Monkeys                                                             // Add more publishers if needed
             });
-
         }
     }
 }
