@@ -25,7 +25,7 @@ namespace YBI02R_HFT_2023241.Client
 
 
             var mainMenu = new ConsoleMenu(args, level: 0)
-                .Add("Songs", () => songs.Show())
+                .Add("Songs", () => EntityMenu(args,"Song").Show())
                 //.Add("Artists", () => EntityMenu(args, "Artist").Show())
                 //.Add("Publishers", () => EntityMenu(args, "Publisher").Show())
                 .Add("Exit", ConsoleMenu.Close);
