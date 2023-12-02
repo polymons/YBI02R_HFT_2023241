@@ -1,8 +1,9 @@
 ﻿using System.Linq;
+using YBI02R_HFT_2023241.Logic.Interfaces;
 using YBI02R_HFT_2023241.Models;
 using YBI02R_HFT_2023241.Repository.Interfaces;
 
-namespace YBI02R_HFT_2023241.Logic
+namespace YBI02R_HFT_2023241.Logic.Classes
 {
     public class ArtistLogic : IArtistLogic
     {
