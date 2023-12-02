@@ -14,7 +14,6 @@ namespace YBI02R_HFT_2023241.Models
         [StringLength(2)]
         public string Country { get; set; }
 
-
         public string City { get; set; }
 
         [Required]
@@ -33,7 +32,14 @@ namespace YBI02R_HFT_2023241.Models
             StudioName = studioName;
             City = studioCity;
             StudioID = studioID;
-            Artists = new HashSet<Artist>();
+            Artists = new HashSet<Artist>(); //Stores a collection of unique elements
+        }
+        public Publisher(string country, string studioName, int studioID)
+        {
+            Country = country;
+            StudioName = studioName;
+            StudioID = studioID;
+            Artists = new HashSet<Artist>(); //Stores a collection of unique elements
         }
         public Publisher(string country, string studioName, string studioCity)
         {
