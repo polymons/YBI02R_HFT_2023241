@@ -1,8 +1,6 @@
 ﻿using ConsoleTools;
 using System;
 using System.Collections.Generic;
-using System.Threading.Channels;
-using System.Threading.Tasks;
 using YBI02R_HFT_2023241.Models;
 
 
@@ -27,7 +25,6 @@ namespace YBI02R_HFT_2023241.Client
 
         }
         #region MenuElements
-
         /// <summary>
         /// 
         /// </summary>
@@ -47,7 +44,9 @@ namespace YBI02R_HFT_2023241.Client
         //this one is for the generic stats
         private static ConsoleMenu subMenu(string[] args)
         {
-            return new ConsoleMenu(args, level: 1)
+
+            //stats that affect all Models
+            return new ConsoleMenu(args, level: 2)
                 //.Add("stat1", () )
                 //.Add("stat2", )
                 //.Add("stat3", )
@@ -57,21 +56,42 @@ namespace YBI02R_HFT_2023241.Client
         //this is for the stats of a given entity
         private static ConsoleMenu subMenu(string[] args, string entity)
         {
-            return new ConsoleMenu(args, level: 2)
-                //.Add("stat1", () )
-                //.Add("stat2", )
-                //.Add("stat3", )
-                //.Add("stat4", )
-                .Add("Exit", ConsoleMenu.Close);
+            switch (entity)
+            {
+                case ("Artist"):
+                    return new ConsoleMenu(args, level: 2)
+                    .Add("Oldest artist", () => GetOldestArtistAge() )
+                    //.Add("stat2", )
+                    //.Add("stat3", )
+                    //.Add("stat4", )
+                    .Add("Exit", ConsoleMenu.Close);
+                case ("Song"):
+                    return new ConsoleMenu(args, level: 2)
+                    .Add("Longest song", () => GetLongestSong())
+                    //.Add("stat2", )
+                    //.Add("stat3", )
+                    //.Add("stat4", )
+                    .Add("Exit", ConsoleMenu.Close);
+                case ("Publisher"):
+                    return new ConsoleMenu(args, level: 2)
+                    //.Add("stat1", () )
+                    //.Add("stat2", )
+                    //.Add("stat3", )
+                    //.Add("stat4", )
+                    .Add("Exit", ConsoleMenu.Close);
+                default:
+                     return new ConsoleMenu(args, level: 2)
+                    .Add("Exit", ConsoleMenu.Close);
+            }
         }
         #endregion
 
         #region CRUD
-        static void Create(string entity)
+        internal static void Create(string entity)
         {
             switch (entity)
             {
-                case "Song":
+                case ("Song"):
                     try
                     {
                         Console.Write("Enter song title: ");
@@ -87,7 +107,7 @@ namespace YBI02R_HFT_2023241.Client
                         Console.WriteLine($"There was an error: {e.Message}");
                     }
                     break;
-                case "Artist":
+                case ("Artist"):
                     try
                     {
                         Console.Write("Enter artist name:");
@@ -103,7 +123,7 @@ namespace YBI02R_HFT_2023241.Client
                         Console.WriteLine($"There was an error: {e.Message}");
                     }
                     break;
-                case "Publisher":
+                case ("Publisher"):
                     try
                     {
                         Console.Write("Enter publisher name:");
@@ -125,7 +145,7 @@ namespace YBI02R_HFT_2023241.Client
             }
         }
 
-        static void Read(string entity)
+        internal static void Read(string entity)
         {
             switch (entity)
             {
@@ -164,7 +184,7 @@ namespace YBI02R_HFT_2023241.Client
             Console.ReadLine();
         }
 
-        static void Update(string entity)
+        internal static void Update(string entity)
         {
             Console.WriteLine($"Enter the wanted {entity}'s ID");
             int updateid = int.Parse(Console.ReadLine());
@@ -240,7 +260,7 @@ namespace YBI02R_HFT_2023241.Client
             }
         }
 
-        static void Delete(string entity)
+        internal static void Delete(string entity)
         {
             Console.WriteLine($"Enter {entity} id to delete:");
             int del = int.Parse(Console.ReadLine());
@@ -263,10 +283,37 @@ namespace YBI02R_HFT_2023241.Client
         #endregion
 
         #region STATS
-        static void GetOldestArtist()
+        internal static void GetOldestArtistAge()
         {
-
+            try
+            {
+                var oldest = _rest.GetSingle<int?>("/Stat/OldestArtistAge");
+                Console.WriteLine($"The oldest artist's age is: {oldest}");
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Some kind of error occured");
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
         }
+        internal static void GetLongestSong()
+        {
+            try
+            {
+                var oldest = _rest.GetSingle<Song>("/Stat/LongestSong");
+                Console.WriteLine($"The longest song is: {oldest.Title} by {oldest.Artist.Name}");
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Some kind of error occured");
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
+        }
+
         #endregion
 
     }

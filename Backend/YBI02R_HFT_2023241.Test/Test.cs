@@ -18,6 +18,7 @@ namespace YBI02R_HFT_2023241.Test
         Mock<IRepository<Publisher>> publisherRepoMock;
         SongLogic songLogic;
         Mock<IRepository<Song>> songRepoMock;
+        StatLogic statLogic;
 
         [SetUp]
         public void Init()
