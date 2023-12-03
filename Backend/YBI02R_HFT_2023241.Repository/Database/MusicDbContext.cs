@@ -67,7 +67,7 @@ namespace YBI02R_HFT_2023241.Repository.Database
 
             modelBuilder.Entity<Song>().HasData(new Song[]
             {
-                //string title, string genre, int length, int songID, int artistID
+                //string title, string genre, int length, int plays, int songID, int artistID
 
                 new Song("Circles", "Pop", 242, 1, 1), // Post Malone
                 new Song("Sunflower", "Pop", 158, 2, 1),

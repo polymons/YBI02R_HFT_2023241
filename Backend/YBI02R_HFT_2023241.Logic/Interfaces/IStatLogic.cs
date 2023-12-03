@@ -1,4 +1,5 @@
-﻿using YBI02R_HFT_2023241.Models;
+﻿using System.Collections.Generic;
+using YBI02R_HFT_2023241.Models;
 
 namespace YBI02R_HFT_2023241.Logic.Interfaces
 {
@@ -7,6 +8,7 @@ namespace YBI02R_HFT_2023241.Logic.Interfaces
         int? OldestArtistAge();
         Song LongestSong();
         Artist ArtistWithMostSongs();
+        List<double?> AvgSongLengthForArtist();
 
     }
 }
