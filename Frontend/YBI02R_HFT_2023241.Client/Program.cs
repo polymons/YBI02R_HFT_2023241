@@ -20,11 +20,14 @@ namespace YBI02R_HFT_2023241.Client
                 .Add("Songs", () => EntityMenu(args,"Song").Show())
                 .Add("Artists", () => EntityMenu(args, "Artist").Show())
                 .Add("Publishers", () => EntityMenu(args, "Publisher").Show())
+                .Add("Stats", () => subMenu(args).Show())
                 .Add("Exit", ConsoleMenu.Close);
             mainMenu.Show();
 
 
         }
+        #region MenuElements
+
         /// <summary>
         /// 
         /// </summary>
@@ -41,17 +44,27 @@ namespace YBI02R_HFT_2023241.Client
                 .Add("Stats", () => subMenu(args, entity).Show())
                 .Add("Exit", ConsoleMenu.Close);
         }
-
-        private static ConsoleMenu subMenu(string[] args, string entity)
+        //this one is for the generic stats
+        private static ConsoleMenu subMenu(string[] args)
         {
             return new ConsoleMenu(args, level: 1)
-                //.Add("stat1", )
+                //.Add("stat1", () )
                 //.Add("stat2", )
                 //.Add("stat3", )
                 //.Add("stat4", )
                 .Add("Exit", ConsoleMenu.Close);
         }
-
+        //this is for the stats of a given entity
+        private static ConsoleMenu subMenu(string[] args, string entity)
+        {
+            return new ConsoleMenu(args, level: 2)
+                //.Add("stat1", () )
+                //.Add("stat2", )
+                //.Add("stat3", )
+                //.Add("stat4", )
+                .Add("Exit", ConsoleMenu.Close);
+        }
+        #endregion
 
         #region CRUD
         static void Create(string entity)
@@ -249,6 +262,12 @@ namespace YBI02R_HFT_2023241.Client
         }
         #endregion
 
+        #region STATS
+        static void GetOldestArtist()
+        {
+
+        }
+        #endregion
 
     }
 }
