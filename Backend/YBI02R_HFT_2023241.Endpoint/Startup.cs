@@ -36,6 +36,7 @@ namespace YBI02R_HFT_2023241.Endpoint
             services.AddTransient<ISongLogic, SongLogic>();
             services.AddTransient<IArtistLogic, ArtistLogic>();
             services.AddTransient<IPublisherLogic, PublisherLogic>();
+            services.AddTransient<IStatLogic, StatLogic>();
 
             services.AddControllers();
             services.AddSwaggerGen(swagger => swagger.SwaggerDoc("v1", new OpenApiInfo { Title = "YBI02R_HFT_2023241.Endpoint", Version = "v1" }));

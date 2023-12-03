@@ -5,13 +5,20 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    public class StatController :ControllerBase
+    public class StatController : ControllerBase
     {
-        ISongLogic logic;
+        IStatLogic stats;
 
-        public StatController(ISongLogic logic)
+        public StatController(IStatLogic statLogic)
         {
-            this.logic = logic;
+            stats = statLogic;
         }
+        [HttpGet]
+        public int? OldestArtistAge()
+        {
+            return stats.OldestArtistAge();
+        }
+
+
     }
 }

@@ -19,6 +19,7 @@ namespace YBI02R_HFT_2023241.Models
 
         //[NotMapped]
         //[ForeignKey("StudioID")]
+        //[JsonIgnore]
         public virtual Publisher Studio { get; set; }
 
         //[NotMapped]

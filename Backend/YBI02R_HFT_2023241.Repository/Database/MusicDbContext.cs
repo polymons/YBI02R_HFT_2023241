@@ -38,11 +38,11 @@ namespace YBI02R_HFT_2023241.Repository.Database
                 .HasForeignKey(x => x.StudioID)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //modelBuilder.Entity<Artist>()
-            //    .HasOne(x => x.Studio)
-            //    .WithMany(x => x.Artists)
-            //    .HasForeignKey(x => x.StudioID)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Artist>()
+                .HasOne(x => x.Studio)
+                .WithMany(x => x.Artists)
+                .HasForeignKey(x => x.StudioID)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
 
@@ -85,20 +85,20 @@ namespace YBI02R_HFT_2023241.Repository.Database
 
             modelBuilder.Entity<Publisher>().HasData(new Publisher[]
             {
-                new Publisher("US","Universal Music Group", "Los Angeles", 1), // Corresponding to Post Malone
-                new Publisher("UK","Atlantic Records", "London", 2), // Corresponding to Niko B
-                new Publisher("CA","Republic Records", "Toronto", 3), // Corresponding to The Weeknd
-                new Publisher("UK", "Central Cee Music", "London", 4), // Corresponding to Central Cee
-                new Publisher("UK", "EMI", "London", 5), // Corresponding to Pink Floyd
-                new Publisher("DE", "Ultra Music", "Stuttgart", 6), // Corresponding to Boris Brejcha
-                new Publisher("DE", "Anjunadeep", "Berlin", 7), // Corresponding to Ben Böhmer
-                new Publisher("NE", "Armada Music", "Berlin", 8), // Corresponding to Jan Blomqvist
-                new Publisher("US", "Warner Records", "Los Angeles", 9), // Corresponding to Red Hot Chili Peppers
-                new Publisher("UK", "Rolling Stones Records", "London", 10), // Corresponding to The Rolling Stones
-                new Publisher("UK", "Virgin EMI", "London", 11), // Corresponding to Lewis Capaldi
-                new Publisher("DE", "Sony Music", "Berlin", 12), // Corresponding to Moritz Hofbauer
-                new Publisher("US", "Ultra Music", "New York", 13), // Corresponding to Sofi Tukker
-                new Publisher("UK", "Domino Recording Company", "Sheffield", 14) // Corresponding to Arctic Monkeys                                                             // Add more publishers if needed
+                new Publisher("US","Universal Music Group", "Los Angeles", 101), // Corresponding to Post Malone
+                new Publisher("UK","Atlantic Records", "London", 102), // Corresponding to Niko B
+                new Publisher("CA","Republic Records", "Toronto", 103), // Corresponding to The Weeknd
+                new Publisher("UK", "Central Cee Music", "London", 104), // Corresponding to Central Cee
+                new Publisher("UK", "EMI", "London", 105), // Corresponding to Pink Floyd
+                new Publisher("DE", "Ultra Music", "Stuttgart", 106), // Corresponding to Boris Brejcha
+                new Publisher("DE", "Anjunadeep", "Berlin", 107), // Corresponding to Ben Böhmer
+                new Publisher("NE", "Armada Music", "Berlin", 108), // Corresponding to Jan Blomqvist
+                new Publisher("US", "Warner Records", "Los Angeles", 109), // Corresponding to Red Hot Chili Peppers
+                new Publisher("UK", "Rolling Stones Records", "London", 110), // Corresponding to The Rolling Stones
+                new Publisher("UK", "Virgin EMI", "London", 111), // Corresponding to Lewis Capaldi
+                new Publisher("DE", "Sony Music", "Berlin", 112), // Corresponding to Moritz Hofbauer
+                new Publisher("US", "Ultra Music", "New York", 113), // Corresponding to Sofi Tukker
+                new Publisher("UK", "Domino Recording Company", "Sheffield", 114) // Corresponding to Arctic Monkeys                                                             // Add more publishers if needed
             });
         }
     }
