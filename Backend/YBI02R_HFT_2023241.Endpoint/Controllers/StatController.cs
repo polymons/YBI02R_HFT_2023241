@@ -35,9 +35,9 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
         }
 
         [HttpGet]
-        public List<double?> AvgSongLengthForArtist()
+        public double? AvgSongLengthForArtist(string artistName)
         {
-            return stats.AvgSongLengthForArtist();
+            return stats.AvgSongLengthForArtist(artistName);
         }
 
         [HttpGet]

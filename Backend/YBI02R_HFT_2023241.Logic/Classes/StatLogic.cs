@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using YBI02R_HFT_2023241.Logic.Interfaces;
 using YBI02R_HFT_2023241.Models;
 using YBI02R_HFT_2023241.Repository.Interfaces;
@@ -24,14 +25,14 @@ namespace YBI02R_HFT_2023241.Logic.Classes
             return artistRepo.ReadAll().OrderByDescending(x => x.Songs.Count).FirstOrDefault();
         }
 
-        public List<double?> AvgSongLengthForArtist()
+        public double? AvgSongLengthForArtist(string artistName)
         {
-            List<double?> avgValues = new List<double?>();
+            List<(string ArtistName, double Avg)> avgValues = new List<(string, double)>();
             foreach (var item in artistRepo.ReadAll().ToList())
             {
-                avgValues.Add(item.Songs.Average(x => x.Length));
+                avgValues.Add((item.Name, item.Songs.Average(x => x.Length)));
             }
-            return avgValues;
+            return avgValues.FirstOrDefault(x => x.ArtistName == artistName).Avg;
         }
 
         public Song LongestSong()
