@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Proxies;
 using YBI02R_HFT_2023241.Models;
 
 namespace YBI02R_HFT_2023241.Repository.Database
@@ -17,7 +18,7 @@ namespace YBI02R_HFT_2023241.Repository.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseInMemoryDatabase("Music").UseLazyLoadingProxies();
+                optionsBuilder.UseLazyLoadingProxies(true).UseInMemoryDatabase("Music");
             }
             else
             {
@@ -34,7 +35,15 @@ namespace YBI02R_HFT_2023241.Repository.Database
             modelBuilder.Entity<Publisher>()
                 .HasMany(x => x.Artists)
                 .WithOne(x => x.Studio)
-                .HasForeignKey(x => x.StudioID);
+                .HasForeignKey(x => x.StudioID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //modelBuilder.Entity<Artist>()
+            //    .HasOne(x => x.Studio)
+            //    .WithMany(x => x.Artists)
+            //    .HasForeignKey(x => x.StudioID)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
 
 
             modelBuilder.Entity<Artist>().HasData(new Artist[]
