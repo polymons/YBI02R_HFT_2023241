@@ -67,20 +67,28 @@ namespace YBI02R_HFT_2023241.Repository.Database
 
             modelBuilder.Entity<Song>().HasData(new Song[]
             {
+                //string title, string genre, int length, int songID, int artistID
+
                 new Song("Circles", "Pop", 242, 1, 1), // Post Malone
-                new Song("Who's That What's That", "Hip-Hop", 243, 2, 2), // Niko B
-                new Song("Blinding Lights", "R&B", 244, 3, 3), // The Weeknd
-                new Song("Diamond Choker", "Hip-Hop", 245, 4, 4), // Central Cee
-                new Song("Comfortably Numb", "Rock", 246, 5, 5), // Pink Floyd
-                new Song("Gravity", "Techno", 247, 6, 6), // Boris Brejcha
-                new Song("After Earth", "Electronic", 248, 7, 7), // Ben Böhmer
-                new Song("Maybe Not", "Electronic", 249, 8, 8), // Jan Blomqvist
-                new Song("Under the Bridge", "Rock", 250, 9, 9), // Red Hot Chili Peppers
-                new Song("Paint It Black", "Rock", 251, 10, 10), // The Rolling Stones
-                new Song("Someone You Loved", "Pop", 252, 11, 11), // Lewis Capaldi
-                new Song("Midnight in Berlin", "Electronic", 253, 12, 12), // Moritz Hofbauer
-                new Song("Drinkee", "Electronic", 254, 13, 13), // Sofi Tukker
-                new Song("Do I Wanna Know?", "Indie Rock", 255, 14, 14) // Arctic Monkeys
+                new Song("Sunflower", "Pop", 158, 2, 1),
+                new Song("I Fall Apart", "R&B", 219, 3, 1),
+                new Song("Who's That What's That", "Hip-Hop", 243, 4, 2), // Niko B
+                new Song("Blinding Lights", "R&B", 244, 5, 3), // The Weeknd
+                new Song("Starboy", "Pop", 229, 6, 3),
+                new Song("Can't Feel My Face", "Pop", 213, 7, 3),
+                new Song("Save Your Tears", "Pop", 215, 8, 3),
+                new Song("In The Night", "Pop", 232, 9, 3),
+                new Song("Diamond Choker", "Hip-Hop", 245, 10, 4), // Central Cee
+                new Song("Comfortably Numb", "Rock", 246, 11, 5), // Pink Floyd
+                new Song("Gravity", "Techno", 247, 12, 6), // Boris Brejcha
+                new Song("After Earth", "Electronic", 248, 13, 7), // Ben Böhmer
+                new Song("Maybe Not", "Electronic", 249, 14, 8), // Jan Blomqvist
+                new Song("Under the Bridge", "Rock", 250, 15, 9), // Red Hot Chili Peppers
+                new Song("Paint It Black", "Rock", 251, 16, 10), // The Rolling Stones
+                new Song("Someone You Loved", "Pop", 252, 17, 11), // Lewis Capaldi
+                new Song("Midnight in Berlin", "Electronic", 253, 18, 12), // Moritz Hofbauer
+                new Song("Drinkee", "Electronic", 254, 19, 13), // Sofi Tukker
+                new Song("Do I Wanna Know?", "Indie Rock", 255, 20, 14) // Arctic Monkeys
             });
 
             modelBuilder.Entity<Publisher>().HasData(new Publisher[]

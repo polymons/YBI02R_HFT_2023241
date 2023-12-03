@@ -24,8 +24,10 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
         {
             return stats.LongestSong();
         }
-
-        
-
+        [HttpGet]
+        public Artist ArtistWithMostSongs()
+        {
+            return stats.ArtistWithMostSongs();
+        }
     }
 }

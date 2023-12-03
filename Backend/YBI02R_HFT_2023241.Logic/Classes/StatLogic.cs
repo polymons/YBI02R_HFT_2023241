@@ -18,6 +18,11 @@ namespace YBI02R_HFT_2023241.Logic.Classes
             this.publisherRepo = publisherRepo;
         }
 
+        public Artist ArtistWithMostSongs()
+        {
+            return artistRepo.ReadAll().OrderByDescending(x => x.Songs.Count).FirstOrDefault();
+        }
+
         public Song LongestSong()
         {
             return artistRepo.ReadAll().SelectMany(x => x.Songs).OrderByDescending(x => x.Length).FirstOrDefault();
