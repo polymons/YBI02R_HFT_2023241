@@ -15,25 +15,47 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
         {
             stats = statLogic;
         }
+
         [HttpGet]
         public int? OldestArtistAge()
         {
             return stats.OldestArtistAge();
         }
+
         [HttpGet]
         public Song LongestSong()
         {
             return stats.LongestSong();
         }
+
         [HttpGet]
         public Artist ArtistWithMostSongs()
         {
             return stats.ArtistWithMostSongs();
         }
+
         [HttpGet]
         public List<double?> AvgSongLengthForArtist()
         {
             return stats.AvgSongLengthForArtist();
+        }
+
+        [HttpGet]
+        public Artist MostPopularArtist()
+        {
+            return stats.MostPopularArtist();
+        }
+
+        [HttpGet]
+        public Song MostPopularSongOfArtist(string artistName)
+        {
+            return stats.MostPopularSongOfArtist(artistName);
+        }
+
+        [HttpGet]
+        public double? MinutesListenedToPublisher(string publisherName)
+        {
+            return 0;
         }
     }
 }
