@@ -88,7 +88,7 @@ namespace YBI02R_HFT_2023241.Client
         public T Get<T>(int id, string endpoint)
         {
             T item = default(T);
-            HttpResponseMessage response = client.GetAsync(endpoint + "/" + id.ToString()).GetAwaiter().GetResult();
+            HttpResponseMessage response = client.GetAsync(endpoint + id.ToString()).GetAwaiter().GetResult();
             if (response.IsSuccessStatusCode)
             {
                 item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
@@ -131,7 +131,7 @@ namespace YBI02R_HFT_2023241.Client
         public void Put<T>(T item, string endpoint)
         {
             HttpResponseMessage response =
-                client.PutAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
+                client.PutAsJsonAsync(endpoint + "/" + item, item).GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)
             {

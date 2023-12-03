@@ -1,6 +1,7 @@
 ﻿using ConsoleTools;
 using System;
 using System.Collections.Generic;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using YBI02R_HFT_2023241.Models;
 
@@ -15,19 +16,19 @@ namespace YBI02R_HFT_2023241.Client
         {
             _rest = new RestService("http://localhost:53910/", "swagger");
 
-            var songs = new ConsoleMenu(args, level: 1)
-                .Add("List", () => Read("Song"))
-                .Add("Create", () => Create("Song"))
-                .Add("Update", () => Update("Song"))
-                .Add("Delete", () => Delete("Song"))
-                //.Add("Stats", () => subMenu.Show())
-                .Add("Exit", ConsoleMenu.Close);
+            //var songs = new ConsoleMenu(args, level: 1)
+            //    .Add("List", () => Read("Song"))
+            //    .Add("Create", () => Create("Song"))
+            //    .Add("Update", () => Update("Song"))
+            //    .Add("Delete", () => Delete("Song"))
+            //    .Add("Stats", () => subMenu.Show())
+            //    .Add("Exit", ConsoleMenu.Close);
 
 
             var mainMenu = new ConsoleMenu(args, level: 0)
                 .Add("Songs", () => EntityMenu(args,"Song").Show())
-                //.Add("Artists", () => EntityMenu(args, "Artist").Show())
-                //.Add("Publishers", () => EntityMenu(args, "Publisher").Show())
+                .Add("Artists", () => EntityMenu(args, "Artist").Show())
+                .Add("Publishers", () => EntityMenu(args, "Publisher").Show())
                 .Add("Exit", ConsoleMenu.Close);
             mainMenu.Show();
 
@@ -46,11 +47,19 @@ namespace YBI02R_HFT_2023241.Client
                 .Add("Create", () => Create(entity))
                 .Add("Update", () => Update(entity))
                 .Add("Delete", () => Delete(entity))
-                //.Add("Stats", () => subMenu.Show())
+                .Add("Stats", () => subMenu(args, entity).Show())
                 .Add("Exit", ConsoleMenu.Close);
         }
 
-
+        private static ConsoleMenu subMenu(string[] args, string entity)
+        {
+            return new ConsoleMenu(args, level: 1)
+                //.Add("stat1", )
+                //.Add("stat2", )
+                //.Add("stat3", )
+                //.Add("stat4", )
+                .Add("Exit", ConsoleMenu.Close);
+        }
 
 
         #region CRUD
@@ -133,7 +142,7 @@ namespace YBI02R_HFT_2023241.Client
                     Console.WriteLine("--------------------------------");
                     foreach (var a in artists)
                     {
-                        Console.WriteLine($"{a.ArtistID}\t{a.Name}\n\t{a.Age}\t{a.StudioID}-{a.Studio.StudioName}\n--------------------------------");
+                        Console.WriteLine($"{a.ArtistID}\t{a.Name}\n\t{a.Age}\t{a.StudioID}-{a.Studio?.StudioName}\n--------------------------------");
                     }
                     break;
                 case "Publisher":
@@ -153,7 +162,7 @@ namespace YBI02R_HFT_2023241.Client
 
         static void Update(string entity)
         {
-            Console.WriteLine($"Enter {entity}'s ID to update");
+            Console.WriteLine($"Enter the wanted {entity}'s ID");
             int updateid = int.Parse(Console.ReadLine());
             switch (entity)
             {
@@ -161,13 +170,13 @@ namespace YBI02R_HFT_2023241.Client
                     try
                     {
                         Song songUpdate = _rest.Get<Song>(updateid, "Song/");
-                        Console.WriteLine($"Enter new song title (old: {songUpdate.Title}):");
+                        Console.Write($"Enter new song title (old: {songUpdate.Title}):");
                         string newSongTitle = Console.ReadLine();
-                        Console.WriteLine($"Enter new song artist id (old: {songUpdate.ArtistID}):");
+                        Console.Write($"Enter new song artist id (old: {songUpdate.ArtistID}):");
                         int newSongArtist = int.Parse(Console.ReadLine());
-                        Console.WriteLine($"Enter new song length (old: {songUpdate.Length}):");
+                        Console.Write($"Enter new song length (old: {songUpdate.Length}):");
                         int newSongLength = int.Parse(Console.ReadLine());
-                        Console.WriteLine($"Enter new song genre (old: {songUpdate.Genre}):");
+                        Console.Write($"Enter new song genre (old: {songUpdate.Genre}):");
                         string newSongGenre = Console.ReadLine();
                         songUpdate.Length = newSongLength;
                         songUpdate.Genre = newSongGenre;
@@ -184,11 +193,11 @@ namespace YBI02R_HFT_2023241.Client
                     try
                     {
                         Artist artistUpdate = _rest.Get<Artist>(updateid, "Artist/");
-                        Console.WriteLine($"Enter new artist studio ID (old: {artistUpdate.StudioID}):");
+                        Console.Write($"Enter new artist studio ID (old: {artistUpdate.StudioID}):");
                         int newArtistStudioID = int.Parse(Console.ReadLine());
-                        Console.WriteLine($"Enter new artist name (old: {artistUpdate.Name}):");
+                        Console.Write($"Enter new artist name (old: {artistUpdate.Name}):");
                         string newArtistName = Console.ReadLine();
-                        Console.WriteLine($"Enter new artist age(old: {artistUpdate.Age}):");
+                        Console.Write($"Enter new artist age(old: {artistUpdate.Age}):");
                         int newArtistAge = int.Parse(Console.ReadLine());
                         artistUpdate.Age = newArtistAge;
                         artistUpdate.StudioID = newArtistStudioID;
@@ -204,12 +213,16 @@ namespace YBI02R_HFT_2023241.Client
                     try
                     {
                         Publisher publisherUpdate = _rest.Get<Publisher>(updateid, "Publisher/");
-                        Console.WriteLine($"Enter new publisher name (old: {publisherUpdate.StudioName}):");
+                        Console.Write($"Enter new publisher name (old: {publisherUpdate.StudioName}):");
                         string newPublisherName = Console.ReadLine();
-                        Console.WriteLine($"Enter new publisher country (old: {publisherUpdate.Country}):");
+                        Console.Write($"Enter the new publisher's country (old: {publisherUpdate.Country}):");
                         string newPublisherCountry = Console.ReadLine();
+                        Console.Write($"Enter the new publisher's city (old: {publisherUpdate.City}):");
+                        string newPublisherCity= Console.ReadLine();
+
                         publisherUpdate.Country = newPublisherCountry;
                         publisherUpdate.StudioName = newPublisherName;
+                        publisherUpdate.City = newPublisherCity;
                         _rest.Put(publisherUpdate, "Publisher");
                     }
                     catch (ArgumentException e)
