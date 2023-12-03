@@ -55,7 +55,7 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
         [HttpGet]
         public double? MinutesListenedToPublisher(string publisherName)
         {
-            return 0;
+            return stats.MinutesListenedToPublisher(publisherName);
         }
     }
 }

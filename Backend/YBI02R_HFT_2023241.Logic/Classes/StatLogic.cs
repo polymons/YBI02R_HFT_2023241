@@ -42,7 +42,16 @@ namespace YBI02R_HFT_2023241.Logic.Classes
 
         public double? MinutesListenedToPublisher(string publisherName)
         {
-            throw new System.NotImplementedException();
+            double mins = 0;
+            var publisher = publisherRepo.ReadAll().ToList().FirstOrDefault(x => x.StudioName == publisherName);
+                foreach (var artist in publisher.Artists)
+                {
+                    foreach (var song in artist.Songs)
+                    {
+                        mins += (song.Length * song.Plays) / 60;
+                    }
+                }
+            return mins;
         }
 
         public Artist MostPopularArtist()
