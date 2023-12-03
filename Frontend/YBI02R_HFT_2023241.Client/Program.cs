@@ -16,15 +16,6 @@ namespace YBI02R_HFT_2023241.Client
         {
             _rest = new RestService("http://localhost:53910/", "swagger");
 
-            //var songs = new ConsoleMenu(args, level: 1)
-            //    .Add("List", () => Read("Song"))
-            //    .Add("Create", () => Create("Song"))
-            //    .Add("Update", () => Update("Song"))
-            //    .Add("Delete", () => Delete("Song"))
-            //    .Add("Stats", () => subMenu.Show())
-            //    .Add("Exit", ConsoleMenu.Close);
-
-
             var mainMenu = new ConsoleMenu(args, level: 0)
                 .Add("Songs", () => EntityMenu(args,"Song").Show())
                 .Add("Artists", () => EntityMenu(args, "Artist").Show())
