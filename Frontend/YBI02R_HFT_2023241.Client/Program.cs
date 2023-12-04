@@ -21,7 +21,7 @@ namespace YBI02R_HFT_2023241.Client
                 .Add("Songs", () => EntityMenu(args,"Song").Show())
                 .Add("Artists", () => EntityMenu(args, "Artist").Show())
                 .Add("Publishers", () => EntityMenu(args, "Publisher").Show())
-                .Add("Stats", () => subMenu(args).Show())
+                //.Add("Stats", () => subMenu(args).Show())
                 .Add("Exit", ConsoleMenu.Close);
             mainMenu.Show();
 
@@ -68,21 +68,15 @@ namespace YBI02R_HFT_2023241.Client
                     .Add("Artist with most songs", () => GetArtistWithMostSongs())
                     .Add("Average song length for artist", () => GetAvgSongLengthForArtist())
                     .Add("Most popular artist", () => GetMostPopularArtist())
-                    //.Add("stat4", )
                     .Add("Exit", ConsoleMenu.Close);
                 case ("Song"):
                     return new ConsoleMenu(args, level: 2)
                     .Add("Longest song", () => GetLongestSong())
-                    //.Add("stat2", )
-                    //.Add("stat3", )
-                    //.Add("stat4", )
+                    .Add("Most popular song of artist", () => GetMostPopularSongOfArtist())
                     .Add("Exit", ConsoleMenu.Close);
                 case ("Publisher"):
                     return new ConsoleMenu(args, level: 2)
                     .Add("Minutes listened to studio", () => GetMinutesListenedToPublisher())
-                    //.Add("stat2", )
-                    //.Add("stat3", )
-                    //.Add("stat4", )
                     .Add("Exit", ConsoleMenu.Close);
                 default:
                      return new ConsoleMenu(args, level: 2)
@@ -396,9 +390,22 @@ namespace YBI02R_HFT_2023241.Client
                 Console.ReadLine();
             }
         }
-
-        internal static void MostPopularSongOfArtist(string artistName)
+        internal static void GetMostPopularSongOfArtist()
         {
+            try
+            {
+                Console.Write("Enter the name of the artist: ");
+                string artistName = Console.ReadLine();
+                var no1Song = _rest.GetString<Song>(artistName, "/Stat/MostPopularSongOfArtist?artistName=");
+                Console.WriteLine($"The most popular song of {artistName} is {no1Song.Title} with {no1Song.Plays}M plays");
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Some kind of error occured");
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
         }
         #endregion
 
