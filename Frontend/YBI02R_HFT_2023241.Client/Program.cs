@@ -1,6 +1,8 @@
 ﻿using ConsoleTools;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using YBI02R_HFT_2023241.Models;
 
 
@@ -61,7 +63,9 @@ namespace YBI02R_HFT_2023241.Client
                 case ("Artist"):
                     return new ConsoleMenu(args, level: 2)
                     .Add("Oldest artist", () => GetOldestArtistAge() )
-                    //.Add("stat2", )
+                    .Add("Artist home town", () => GetArtistHomeCity())
+                    .Add("Artist with most songs", () => GetArtistWithMostSongs())
+                    .Add("Average song length for artist", () => GetAvgSongLengthForArtist())
                     //.Add("stat3", )
                     //.Add("stat4", )
                     .Add("Exit", ConsoleMenu.Close);
@@ -74,7 +78,7 @@ namespace YBI02R_HFT_2023241.Client
                     .Add("Exit", ConsoleMenu.Close);
                 case ("Publisher"):
                     return new ConsoleMenu(args, level: 2)
-                    //.Add("stat1", () )
+                    .Add("Minutes listened to studio", () => GetMinutesListenedToPublisher())
                     //.Add("stat2", )
                     //.Add("stat3", )
                     //.Add("stat4", )
@@ -151,28 +155,25 @@ namespace YBI02R_HFT_2023241.Client
             {
                 case "Song":
                     List<Song> songs = _rest.Get<Song>("Song");
-                    Console.WriteLine("");
-                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("\n" + "--------------------------------");
                     foreach (var s in songs)
                     {
-                        Console.Write($"{s.SongID}\t{s.Title}\n\t{s.Genre} | {s.Length} | ");
-                        if (s.Artist == null) Console.Write("Artist has been deleted\n--------------------------------\n");
+                        Console.Write($"{s.SongID}\t{s.Title}\n\t{s?.Genre} | {s.Length} | {s.Plays} |");
+                        if (s.Artist == null) Console.Write("Artist not found\n--------------------------------\n");
                         else Console.Write($"{s.Artist.Name}\n--------------------------------\n");
                     }
                     break;
                 case "Artist":
                     List<Artist> artists = _rest.Get<Artist>("Artist");
-                    Console.WriteLine("");
-                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("\n" + "--------------------------------");
                     foreach (var a in artists)
                     {
-                        Console.WriteLine($"{a.ArtistID}\t{a.Name}\n\t{a.Age}\t{a.StudioID}-{a.Studio?.StudioName}\n--------------------------------");
+                        Console.WriteLine($"{a.ArtistID}\t{a.Name}\n\t{a?.Age}\t{a?.StudioID}-{a.Studio?.StudioName}\n--------------------------------");
                     }
                     break;
                 case "Publisher":
                     List<Publisher> pubs = _rest.Get<Publisher>("Publisher");
-                    Console.WriteLine("");
-                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("\n" + "--------------------------------");
                     foreach (Publisher p in pubs)
                     {
                         Console.WriteLine($"{p.StudioID}\t{p.StudioName}\t{p.Country}\n--------------------------------");
@@ -193,14 +194,14 @@ namespace YBI02R_HFT_2023241.Client
                 case "Song":
                     try
                     {
-                        Song songUpdate = _rest.Get<Song>(updateid, "Song/");
-                        Console.Write($"Enter new song title (old: {songUpdate.Title}):");
+                        Song songUpdate = _rest.GetId<Song>(updateid, "Song/");
+                        Console.Write($"Enter new song title (old: {songUpdate?.Title}):");
                         string newSongTitle = Console.ReadLine();
-                        Console.Write($"Enter new song artist id (old: {songUpdate.ArtistID}):");
+                        Console.Write($"Enter new song artist id (old: {songUpdate?.ArtistID}):");
                         int newSongArtist = int.Parse(Console.ReadLine());
-                        Console.Write($"Enter new song length (old: {songUpdate.Length}):");
+                        Console.Write($"Enter new song length (old: {songUpdate?.Length}):");
                         int newSongLength = int.Parse(Console.ReadLine());
-                        Console.Write($"Enter new song genre (old: {songUpdate.Genre}):");
+                        Console.Write($"Enter new song genre (old: {songUpdate?.Genre}):");
                         string newSongGenre = Console.ReadLine();
                         songUpdate.Length = newSongLength;
                         songUpdate.Genre = newSongGenre;
@@ -216,12 +217,12 @@ namespace YBI02R_HFT_2023241.Client
                 case "Artist":
                     try
                     {
-                        Artist artistUpdate = _rest.Get<Artist>(updateid, "Artist/");
-                        Console.Write($"Enter new artist studio ID (old: {artistUpdate.StudioID}):");
+                        Artist artistUpdate = _rest.GetId<Artist>(updateid, "Artist/");
+                        Console.Write($"Enter new artist studio ID (old: {artistUpdate?.StudioID}):");
                         int newArtistStudioID = int.Parse(Console.ReadLine());
-                        Console.Write($"Enter new artist name (old: {artistUpdate.Name}):");
+                        Console.Write($"Enter new artist name (old: {artistUpdate?.Name}):");
                         string newArtistName = Console.ReadLine();
-                        Console.Write($"Enter new artist age(old: {artistUpdate.Age}):");
+                        Console.Write($"Enter new artist age(old: {artistUpdate?.Age}):");
                         int newArtistAge = int.Parse(Console.ReadLine());
                         artistUpdate.Age = newArtistAge;
                         artistUpdate.StudioID = newArtistStudioID;
@@ -236,12 +237,12 @@ namespace YBI02R_HFT_2023241.Client
                 case "Publisher":
                     try
                     {
-                        Publisher publisherUpdate = _rest.Get<Publisher>(updateid, "Publisher/");
-                        Console.Write($"Enter new publisher name (old: {publisherUpdate.StudioName}):");
+                        Publisher publisherUpdate = _rest.GetId<Publisher>(updateid, "Publisher/");
+                        Console.Write($"Enter new publisher name (old: {publisherUpdate?.StudioName}):");
                         string newPublisherName = Console.ReadLine();
-                        Console.Write($"Enter the new publisher's country (old: {publisherUpdate.Country}):");
+                        Console.Write($"Enter the new publisher's country (old: {publisherUpdate?.Country}):");
                         string newPublisherCountry = Console.ReadLine();
-                        Console.Write($"Enter the new publisher's city (old: {publisherUpdate.City}):");
+                        Console.Write($"Enter the new publisher's city (old: {publisherUpdate?.City}):");
                         string newPublisherCity= Console.ReadLine();
 
                         publisherUpdate.Country = newPublisherCountry;
@@ -313,7 +314,80 @@ namespace YBI02R_HFT_2023241.Client
                 Console.ReadLine();
             }
         }
+        internal static void GetArtistHomeCity()
+        {
+            try
+            {
+                Console.Write("Enter the name of the artist: ");
+                string artistName = Console.ReadLine();
+                var homeCity = _rest.GetString<string>(artistName, "/Stat/ArtistHomeCity?artistName=");
+                Console.WriteLine($"The home town of {artistName} is: {homeCity}");
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Some kind of error occured");
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
+        }
+        internal static void GetArtistWithMostSongs()
+        {
+            try
+            {
+                var mostSongArtist = _rest.GetSingle<Artist>("/Stat/ArtistWithMostSongs").Name;
+                Console.WriteLine($"The artist with most songs is: {mostSongArtist}");
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Some kind of error occured");
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
+        }
+        internal static void GetAvgSongLengthForArtist()
+        {
+            try
+            {
+                Console.Write("Enter the name of the artist: ");
+                string artistName = Console.ReadLine();
+                var avgLenght = _rest.GetString<double?>(artistName, "/Stat/AvgSongLengthForArtist?artistName=");
+                Console.WriteLine($"The average song-length of {artistName} is: {avgLenght}");
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Some kind of error occured");
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
+        }
+        internal static void GetMinutesListenedToPublisher()
+        {
+            try
+            {
+                Console.Write("Enter the name of the studio (=publisher): ");
+                string studioName = Console.ReadLine();
+                var minutes = _rest.GetString<string>(studioName, "/Stat/MinutesListenedToPublisher?publisherName=");
+                Console.WriteLine($"The total amount of minutes listened to {studioName} is: {minutes}");
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Some kind of error occured");
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
+        }
 
+        internal static void MostPopularArtist()
+        {
+        }
+
+        internal static void MostPopularSongOfArtist(string artistName)
+        {
+        }
         #endregion
 
     }

@@ -85,7 +85,7 @@ namespace YBI02R_HFT_2023241.Client
             return item;
         }
 
-        public T Get<T>(int id, string endpoint)
+        public T GetId<T>(int id, string endpoint)
         {
             T item = default(T);
             HttpResponseMessage response = client.GetAsync(endpoint + id.ToString()).GetAwaiter().GetResult();
@@ -100,7 +100,21 @@ namespace YBI02R_HFT_2023241.Client
             }
             return item;
         }
-
+        public T GetString<T>(string data, string endpoint)
+        {
+            T item = default(T);
+            HttpResponseMessage response = client.GetAsync(endpoint + data.ToString()).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+            }
+            else
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
+            return item;
+        }
         public void Post<T>(T item, string endpoint)
         {
             HttpResponseMessage response =
