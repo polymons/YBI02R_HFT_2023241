@@ -21,7 +21,7 @@ namespace YBI02R_HFT_2023241.Models
         [ForeignKey(nameof(Artist))]
         public int ArtistID { get; set; }
 
-        [Range(0,1500)]
+        [Range(0, 1500)]
         public int Length { get; set; }
 
         public int Plays { get; set; }
@@ -38,7 +38,7 @@ namespace YBI02R_HFT_2023241.Models
             SongID = songID;
             ArtistID = artistID;
         }
-        public Song(string title, string genre, int length,int plays, int songID, int artistID)
+        public Song(string title, string genre, int length, int plays, int songID, int artistID)
         {
             Title = title;
             Genre = genre;

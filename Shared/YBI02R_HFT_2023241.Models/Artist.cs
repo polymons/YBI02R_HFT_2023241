@@ -26,7 +26,7 @@ namespace YBI02R_HFT_2023241.Models
         [JsonIgnore]
         public virtual ICollection<Song> Songs { get; set; }
 
-        [Range(18,100)]
+        [Range(18, 100)]
         public int Age { get; set; }
 
         public Artist()
@@ -37,7 +37,7 @@ namespace YBI02R_HFT_2023241.Models
         {
             ArtistID = id;
             Name = name;
-            StudioID = studioID; 
+            StudioID = studioID;
             Age = age;
         }
         public Artist(string name, int studioID, int age)

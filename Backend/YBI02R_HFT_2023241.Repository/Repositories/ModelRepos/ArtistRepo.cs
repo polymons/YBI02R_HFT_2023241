@@ -3,7 +3,6 @@ using YBI02R_HFT_2023241.Models;
 using YBI02R_HFT_2023241.Repository.Database;
 using YBI02R_HFT_2023241.Repository.Interfaces;
 using YBI02R_HFT_2023241.Repository.Repositories.Repo;
-using YBI02R_HFT_2023241.Repository.Repositories.ModelRepos;
 
 
 namespace YBI02R_HFT_2023241.Repository.Repositories.ModelRepos

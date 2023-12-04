@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Intrinsics.X86;
 using YBI02R_HFT_2023241.Logic.Interfaces;
 using YBI02R_HFT_2023241.Models;
 using YBI02R_HFT_2023241.Repository.Interfaces;
@@ -49,13 +48,13 @@ namespace YBI02R_HFT_2023241.Logic.Classes
         {
             double mins = 0;
             var publisher = publisherRepo.ReadAll().ToList().FirstOrDefault(x => x.StudioName == publisherName);
-                //foreach (var artist in publisher.Artists)
-                //{
-                //    foreach (var song in artist.Songs)
-                //    {
-                //        mins += (song.Length * song.Plays) / 60;
-                //    }
-                //}
+            //foreach (var artist in publisher.Artists)
+            //{
+            //    foreach (var song in artist.Songs)
+            //    {
+            //        mins += (song.Length * song.Plays) / 60;
+            //    }
+            //}
             foreach (var song in from artist in publisher.Artists
                                  from song in artist.Songs
                                  select song)

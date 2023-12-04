@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Proxies;
-using System.Xml.Linq;
 using YBI02R_HFT_2023241.Models;
 
 namespace YBI02R_HFT_2023241.Repository.Database
@@ -91,8 +89,48 @@ namespace YBI02R_HFT_2023241.Repository.Database
                 new Song("Someone You Loved", "Pop", 252, 10500, 17, 11), // Lewis Capaldi
                 new Song("Midnight in Berlin", "Electronic", 253, 7800, 18, 12), // Moritz Hofbauer
                 new Song("Drinkee", "Electronic", 254, 6900, 19, 13), // Sofi Tukker
-                new Song("Do I Wanna Know?", "Indie Rock", 255, 8800, 20, 14) // Arctic Monkeys
+                new Song("Do I Wanna Know?", "Indie Rock", 255, 8800, 20, 14), // Arctic Monkeys
 
+                new Song("Rockstar", "Hip-Hop", 256, 9200, 21, 1), // Post Malone
+                new Song("Congratulations", "Hip-Hop", 257, 7800, 22, 1),
+                new Song("Goodbyes", "Hip-Hop", 258, 6900, 23, 1),
+                new Song("Save Time", "Hip-Hop", 260, 9200, 25, 2), // Niko B
+                new Song("The Hills", "R&B", 261, 7800, 26, 3), // The Weeknd
+                new Song("Earned It", "R&B", 262, 6900, 27, 3),
+                new Song("Wicked Games", "R&B", 263, 8800, 28, 3),
+                new Song("The Morning", "R&B", 264, 9200, 29, 3),
+
+                new Song("Addison Rae", "Hip-Hop", 265, 9200, 30, 4), // Central Cee
+                new Song("Loading", "Hip-Hop", 266, 7800, 31, 4),
+                new Song("6 For 6", "Hip-Hop", 267, 6900, 32, 4),
+
+                new Song("Wish You Were Here", "Rock", 268, 8800, 33, 5), // Pink Floyd
+                new Song("Another Brick in the Wall", "Rock", 269, 9200, 34, 5),
+                new Song("Money", "Rock", 270, 7800, 35, 5),
+                new Song("Time", "Rock", 271, 6900, 36, 5),
+
+                new Song("Happinezz", "Techno", 273, 9200, 38, 6), // Boris Brejcha
+                
+                new Song("Breathing", "Electronic", 275, 6900, 40, 7), // Ben Böhmer
+                new Song("Black Hole", "Electronic", 276, 8800, 41, 7),
+                new Song("In Memoriam", "Electronic", 277, 9200, 42, 7),
+
+                new Song("Dancing People Are Never Wrong", "Electronic", 278, 7800, 43, 8), // Jan Blomqvist
+                new Song("The Space In Between", "Electronic", 279, 6900, 44, 8),
+                new Song("Disconnected", "Electronic", 280, 8800, 45, 8),
+
+                new Song("Californication", "Rock", 281, 9200, 46, 9), // Red Hot Chili Peppers
+                new Song("Otherside", "Rock", 282, 7800, 47, 9),
+                new Song("Snow", "Rock", 283, 6900, 48, 9),
+                new Song("Dark Necessities", "Rock", 284, 8800, 49, 9),
+
+                new Song("Sympathy for the Devil", "Rock", 285, 9200, 50, 10), // The Rolling Stones
+                new Song("Gimme Shelter", "Rock", 286, 7800, 51, 10),
+                new Song("Wild Horses", "Rock", 288, 8800, 53, 10),
+
+                new Song("Before You Go", "Pop", 290, 7800, 55, 11), // Lewis Capaldi
+                new Song("Bruises", "Pop", 291, 6900, 56, 11),
+                new Song("Hold Me While You Wait", "Pop", 292, 8800, 57, 11),
             });
 
             modelBuilder.Entity<Publisher>().HasData(new Publisher[]
