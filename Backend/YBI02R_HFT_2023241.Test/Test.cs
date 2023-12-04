@@ -28,40 +28,41 @@ namespace YBI02R_HFT_2023241.Test
             artistRepoMock = new Mock<IRepository<Artist>>();
             artistRepoMock.Setup(a => a.ReadAll()).Returns(new List<Artist>()
             {
-                new Artist(1, "Post Malone", 101, 26), //int id, string name, int studioID, int age
-                new Artist(2, "Niko B", 102, 22),
-                new Artist(3, "The Weeknd", 103, 32),
-                new Artist(4, "Central Cee", 104, 23),
-                new Artist(5, "Pink Floyd", 105, 75),
-
+                new Artist { ArtistID = 1, Name = "Post Malone", StudioID = 101, Age = 26 },
+                new Artist { ArtistID = 2, Name = "Niko B", StudioID = 102, Age = 22 },
+                new Artist { ArtistID = 3, Name = "The Weeknd", StudioID = 103, Age = 32 },
+                new Artist { ArtistID = 4, Name = "Central Cee", StudioID = 104, Age = 23 },
+                new Artist { ArtistID = 5, Name = "Pink Floyd", StudioID = 105, Age = 75 }
             }.AsQueryable());
 
             songRepoMock = new Mock<IRepository<Song>>();
             songRepoMock.Setup(a => a.ReadAll()).Returns(new List<Song>()
             {
-                new Song("Circles", "Pop", 242, 1, 1), // Post Malone
-                new Song("Who's That What's That", "Hip-Hop", 243, 2, 2), // Niko B
-                new Song("Blinding Lights", "R&B", 244, 3, 3), // The Weeknd
-                new Song("Diamond Choker", "Hip-Hop", 245, 4, 4), // Central Cee
-                new Song("Comfortably Numb", "Rock", 246, 5, 5), // Pink Floyd
+                new Song { Title = "Circles", Genre = "Pop", Length = 242, Plays = 1, SongID = 1 },
+                new Song { Title = "Who's That What's That", Genre = "Hip-Hop", Length = 243, Plays = 2, SongID = 2 },
+                new Song { Title = "Blinding Lights", Genre = "R&B", Length = 244, Plays = 3, SongID = 3 },
+                new Song { Title = "Diamond Choker", Genre = "Hip-Hop", Length = 245, Plays = 4, SongID = 4 },
+                new Song { Title = "Comfortably Numb", Genre = "Rock", Length = 246, Plays = 5, SongID = 5 },
+                new Song { Title = "Another Brick in the Wall", Genre = "Rock", Length = 247, Plays = 6, SongID = 6 },
+                new Song { Title = "Wish You Were Here", Genre = "Rock", Length = 248, Plays = 7, SongID = 7 },
+                new Song { Title = "Money", Genre = "Rock", Length = 249, Plays = 8, SongID = 8 }
             }.AsQueryable());
 
             publisherRepoMock = new Mock<IRepository<Publisher>>();
             publisherRepoMock.Setup(a => a.ReadAll()).Returns(new List<Publisher>()
             {
-                new Publisher("US","Universal Music Group", "Los Angeles", 101), // Corresponding to Post Malone
-                new Publisher("UK","Atlantic Records", "London", 102), // Corresponding to Niko B
-                new Publisher("CA","Republic Records", "Toronto", 103), // Corresponding to The Weeknd
-                new Publisher("UK", "Central Cee Music", "London", 104), // Corresponding to Central Cee
-                new Publisher("UK", "EMI", "London", 105), // Corresponding to Pink Floyd
+                new Publisher { Country = "US", StudioName = "Universal Music Group", City = "Los Angeles", StudioID = 101 },
+                new Publisher { Country = "UK", StudioName = "Atlantic Records", City = "London", StudioID = 102 },
+                new Publisher { Country = "CA", StudioName = "Republic Records", City = "Toronto", StudioID = 103 },
+                new Publisher { Country = "UK", StudioName = "Central Cee Music", City = "London", StudioID = 104 },
+                new Publisher { Country = "UK", StudioName = "EMI", City = "London", StudioID = 105 }
             }.AsQueryable());
 
+            statLogic = new StatLogic(songRepoMock.Object, artistRepoMock.Object, publisherRepoMock.Object);
             artistLogic = new ArtistLogic(artistRepoMock.Object);
             publisherLogic = new PublisherLogic(publisherRepoMock.Object);
             songLogic = new SongLogic(songRepoMock.Object);
         }
-
-
         [Test]
         public void CreateArtist_ShouldCreateArtist()
         {
@@ -75,7 +76,6 @@ namespace YBI02R_HFT_2023241.Test
             artistRepoMock.Verify(son => son.Create(testArtist), Times.Once);
         }
 
-
         [Test]
         public void CreatePublisher_ShouldCreatePublisher()
         {
@@ -88,7 +88,6 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             publisherRepoMock.Verify(pub => pub.Create(createdPublisher), Times.Once);
         }
-
 
         [Test]
         public void CreateSong_ShouldCreateSong()
@@ -110,7 +109,6 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             songRepoMock.Verify(repo => repo.Create(song), Times.Once);
         }
-
 
         [Test]
         public void DeleteArtist_ShouldDeleteArtist()
@@ -157,7 +155,6 @@ namespace YBI02R_HFT_2023241.Test
             songRepoMock.Verify(repo => repo.Delete(songToDelete.SongID), Times.Once);
         }
 
-
         [Test]
         public void ArtistHomeCity_ReturnsCorrectCity()
         {
@@ -196,6 +193,18 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             Assert.AreEqual(artist2, result);
         }
+        //[Test]
+        //public void LongestSong_ReturnsLongestSong()
+        //{
+        //    // Arrange
+        //    var expectedSong = new Song { Title = "Money", Genre = "Rock", Length = 249, Plays = 8, SongID = 8 }.Title; // Longest song
+
+        //    // Act
+        //    var longestSong = statLogic.LongestSong().Title;
+
+        //    // Assert
+        //    Assert.AreEqual(expectedSong, longestSong);
+        //}
 
 
         [Test]
@@ -237,107 +246,30 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             Assert.AreEqual(78, result);
         }
+        [Test]
+        public void AvgSongLengthForArtist_ReturnsAvgSongLengthForArtist()
+        {
+
+        }
 
 
-        //[Test]
-        //public void LongestSong_ReturnsLongestSong()
-        //{
-        //    // Arrange
-        //    var song1 = new Song("Song1", "R&B", 200, 1, 1, 1);
-        //    var song2 = new Song("Song2", "Pop", 3000, 2, 2, 1);
-        //    var songRepoMock = new Mock<IRepository<Song>>();
-        //    songRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Song> { song1, song2 }.AsQueryable());
-        //    var statLogic = new StatLogic(null, null, songRepoMock.Object);
-
-        //    // Act
-        //    Song result = statLogic.LongestSong();
-
-        //    // Assert
-        //    Assert.AreEqual(song2, result);
-        //}
+        [Test]
+        public void MostPopularArtist_ReturnsMostPopularArtist()
+        {
+        }
 
 
-        //[Test]
-        //public void AvgSongLengthForArtist_ReturnsAvgSongLengthForArtist()
-        //{
-        //    // Arrange
-        //    var artist1 = new Artist(1, "Artist1", 20, 3000);
-        //    artist1.Songs = new List<Song> { new Song("Song1", 200), new Song("Song2", 300) };
-        //    var artist2 = new Artist(2, "Artist2", 25, 4000);
-        //    artist2.Songs = new List<Song> { new Song("Song3", 250), new Song("Song4", 350) };
-        //    var artistRepoMock = new Mock<IRepository<Artist>>();
-        //    artistRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist1, artist2 }.AsQueryable());
-        //    var statLogic = new StatLogic(null, artistRepoMock.Object, null);
-
-        //    // Act
-        //    double? result = statLogic.AvgSongLengthForArtist("Artist1");
-
-        //    // Assert
-        //    Assert.AreEqual(250, result);
-        //}
+        [Test]
+        public void MostPopularSongOfArtist_ReturnsMostPopularSongOfArtist()
+        {
+        }
 
 
-        //[Test]
-        //public void MostPopularArtist_ReturnsMostPopularArtist()
-        //{
-        //    // Arrange
-        //    var artist1 = new Artist(1, "Artist1", 20, 3000);
-        //    artist1.Plays = 100;
-        //    var artist2 = new Artist(2, "Artist2", 25, 4000);
-        //    artist2.Plays = 200;
-        //    var artistRepoMock = new Mock<IRepository<Artist>>();
-        //    artistRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist1, artist2 }.AsQueryable());
-        //    var statLogic = new StatLogic(null, artistRepoMock.Object, null);
+        [Test]
+        public void MinutesListenedToPublisher_ReturnsMinutesListenedToPublisher()
+        {
 
-        //    // Act
-        //    Artist result = statLogic.MostPopularArtist();
-
-        //    // Assert
-        //    Assert.AreEqual(artist2, result);
-        //}
-
-
-        //[Test]
-        //public void MostPopularSongOfArtist_ReturnsMostPopularSongOfArtist()
-        //{
-        //    // Arrange
-        //    var artist1 = new Artist(1, "Artist1", 20, 3000);
-        //    artist1.Songs = new List<Song> { new Song("Song1", 200), new Song("Song2", 300) };
-        //    var artist2 = new Artist(2, "Artist2", 25, 4000);
-        //    artist2.Songs = new List<Song> { new Song("Song3", 250), new Song("Song4", 350) };
-        //    var artistRepoMock = new Mock<IRepository<Artist>>();
-        //    artistRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist1, artist2 }.AsQueryable());
-        //    var statLogic = new StatLogic(null, artistRepoMock.Object, null);
-
-        //    // Act
-        //    Song result = statLogic.MostPopularSongOfArtist("Artist1");
-
-        //    // Assert
-        //    Assert.AreEqual("Song2", result.Name);
-        //}
-
-
-        //[Test]
-        //public void MinutesListenedToPublisher_ReturnsMinutesListenedToPublisher()
-        //{
-        //    // Arrange
-        //    var artist1 = new Artist(1, "Artist1", 20, 3000);
-        //    artist1.Songs = new List<Song> { new Song("Song1", 200), new Song("Song2", 300) };
-        //    var artist2 = new Artist(2, "Artist2", 25, 4000);
-        //    artist2.Songs = new List<Song> { new Song("Song3", 250), new Song("Song4", 350) };
-        //    var publisher = new Publisher("Publisher1");
-        //    publisher.Artists = new List<Artist> { artist1, artist2 };
-        //    var publisherRepoMock = new Mock<IRepository<Publisher>>();
-        //    publisherRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Publisher> { publisher }.AsQueryable());
-        //    var statLogic = new StatLogic(publisherRepoMock.Object, null, null);
-
-        //    // Act
-        //    double? result = statLogic.MinutesListenedToPublisher("Publisher1");
-
-        //    // Assert
-        //    Assert.AreEqual(25, result);
-        //}
-
+        }
 
         [Test]
         public void ArtistHomeCity_ReturnsArtistHomeCity()
