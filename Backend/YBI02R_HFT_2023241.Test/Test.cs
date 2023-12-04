@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using YBI02R_HFT_2023241.Logic.Classes;
+using YBI02R_HFT_2023241.Logic.Interfaces;
 using YBI02R_HFT_2023241.Models;
 using YBI02R_HFT_2023241.Repository.Interfaces;
 
@@ -56,11 +57,26 @@ namespace YBI02R_HFT_2023241.Test
                 new Publisher("UK", "EMI", "London", 105), // Corresponding to Pink Floyd
             }.AsQueryable());
 
-
-
-
+            artistLogic = new ArtistLogic(artistRepoMock.Object);
+            publisherLogic = new PublisherLogic(publisherRepoMock.Object);
+            songLogic = new SongLogic(songRepoMock.Object);
+        }
+        [Test]
+        public void CreateArtist()
+        {
+            Artist testArtist = new Artist(2000, "Analog Balaton", 3000, 20);
+            artistLogic.Create(testArtist);
+            artistRepoMock.Verify(son => son.Create(testArtist), Times.Once);
+        }
+        [Test]
+        public void CreatePublisher()
+        {
+            Publisher createdPublisher = new Publisher("HUN", "Analog Balaton studio", 3000);
+            publisherLogic.Create(createdPublisher);
+            publisherRepoMock.Verify(pub => pub.Create(createdPublisher), Times.Once);
 
         }
+
 
     }
 }
