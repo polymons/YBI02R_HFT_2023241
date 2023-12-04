@@ -24,6 +24,8 @@ namespace YBI02R_HFT_2023241.Models
         [Range(0,1500)]
         public int Length { get; set; }
 
+        public int Plays { get; set; }
+
         public Song()
         {
 
@@ -33,6 +35,15 @@ namespace YBI02R_HFT_2023241.Models
             Title = title;
             Genre = genre;
             Length = length;
+            SongID = songID;
+            ArtistID = artistID;
+        }
+        public Song(string title, string genre, int length,int plays, int songID, int artistID)
+        {
+            Title = title;
+            Genre = genre;
+            Length = length;
+            Plays = plays;
             SongID = songID;
             ArtistID = artistID;
         }

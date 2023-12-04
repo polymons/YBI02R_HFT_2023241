@@ -17,8 +17,12 @@ namespace YBI02R_HFT_2023241.Models
 
         public int StudioID { get; set; }
 
+        //[NotMapped]
+        //[ForeignKey("StudioID")]
+        //[JsonIgnore]
         public virtual Publisher Studio { get; set; }
 
+        //[NotMapped]
         [JsonIgnore]
         public virtual ICollection<Song> Songs { get; set; }
 
@@ -27,14 +31,13 @@ namespace YBI02R_HFT_2023241.Models
 
         public Artist()
         {
-
+            Songs = new HashSet<Song>();
         }
         public Artist(int id, string name, int studioID, int age)
         {
             ArtistID = id;
             Name = name;
-            StudioID = studioID;
-            Songs = new HashSet<Song>();
+            StudioID = studioID; 
             Age = age;
         }
         public Artist(string name, int studioID, int age)

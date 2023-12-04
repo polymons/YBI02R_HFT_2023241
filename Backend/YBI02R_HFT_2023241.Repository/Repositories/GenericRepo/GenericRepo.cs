@@ -4,7 +4,7 @@ using YBI02R_HFT_2023241.Repository.Interfaces;
 
 namespace YBI02R_HFT_2023241.Repository.Repositories.Repo
 {
-    //A class to connect Publishers, Artists and Songs into the context
+
     public abstract class Repo<T> : IRepository<T> where T : class
     {
         protected MusicDbContext _musicDbContext; //protected!
@@ -28,7 +28,14 @@ namespace YBI02R_HFT_2023241.Repository.Repositories.Repo
 
         public void Delete(int id)
         {
-            _musicDbContext.Set<T>().Remove(Read(id));
+            try
+            {
+                _musicDbContext.Set<T>().Remove(Read(id));
+            }
+            catch (System.Exception ex)
+            {
+                //incoming id is outside of range/null
+            }
             _musicDbContext.SaveChanges();
         }
 

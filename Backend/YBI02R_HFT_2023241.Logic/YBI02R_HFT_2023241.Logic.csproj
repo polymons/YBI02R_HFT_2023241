@@ -20,9 +20,4 @@
     <ProjectReference Include="..\YBI02R_HFT_2023241.Repository\YBI02R_HFT_2023241.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Classes\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>
