@@ -76,7 +76,43 @@ namespace YBI02R_HFT_2023241.Test
             publisherRepoMock.Verify(pub => pub.Create(createdPublisher), Times.Once);
 
         }
+        [Test]
+        public void ArtistHomeCity_ReturnsCorrectCity()
+        {
+            // Arrange
+            string artistName = "Mozart";
+            string expectedCity = "Vienna";
+            var artist = new Artist(2001, artistName, 3001, 20);
+            artist.Studio = new Publisher { City = expectedCity, StudioID = 3001 };
+            var artistRepoMock = new Mock<IRepository<Artist>>();
+            artistRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist }.AsQueryable());
+            var statLogic = new StatLogic(null, artistRepoMock.Object, null);
 
+            // Act
+            string result = statLogic.ArtistHomeCity(artistName);
 
+            // Assert
+            Assert.AreEqual(expectedCity, result);
+        }
+
+        [Test]
+        public void ArtistWithMostSongs_ReturnsArtistWithMostSongs()
+        {
+            // Arrange
+            var artist1 = new Artist(1, "Artist1", 20, 3000);
+            artist1.Songs = new List<Song> { new Song(), new Song() };
+            var artist2 = new Artist(2, "Artist2", 25, 4000);
+            artist2.Songs = new List<Song> { new Song(), new Song(), new Song() };
+            var artistRepoMock = new Mock<IRepository<Artist>>();
+            artistRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist1, artist2 }.AsQueryable());
+            var statLogic = new StatLogic(null, artistRepoMock.Object, null);
+
+            // Act
+            Artist result = statLogic.ArtistWithMostSongs();
+
+            // Assert
+            Assert.AreEqual(artist2, result);
+        }
     }
 }
+
