@@ -3,6 +3,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using YBI02R_HFT_2023241.Models;
 
 
@@ -66,7 +67,7 @@ namespace YBI02R_HFT_2023241.Client
                     .Add("Artist home town", () => GetArtistHomeCity())
                     .Add("Artist with most songs", () => GetArtistWithMostSongs())
                     .Add("Average song length for artist", () => GetAvgSongLengthForArtist())
-                    //.Add("stat3", )
+                    .Add("Most popular artist", () => GetMostPopularArtist())
                     //.Add("stat4", )
                     .Add("Exit", ConsoleMenu.Close);
                 case ("Song"):
@@ -335,8 +336,8 @@ namespace YBI02R_HFT_2023241.Client
         {
             try
             {
-                var mostSongArtist = _rest.GetSingle<Artist>("/Stat/ArtistWithMostSongs").Name;
-                Console.WriteLine($"The artist with most songs is: {mostSongArtist}");
+                var mostSongArtist = _rest.GetSingle<Artist>("/Stat/ArtistWithMostSongs");
+                Console.WriteLine($"The artist with most songs is: {mostSongArtist.Name} with {mostSongArtist.Songs.Count} songs");
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -380,9 +381,20 @@ namespace YBI02R_HFT_2023241.Client
                 Console.ReadLine();
             }
         }
-
-        internal static void MostPopularArtist()
+        internal static void GetMostPopularArtist()
         {
+            try
+            {
+                var no1 = _rest.GetSingle<Artist>("/Stat/MostPopularArtist");
+                Console.WriteLine($"The most popular artist is {no1.Name} at age {no1.Age} with {no1.Songs.Count} songs.");
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Some kind of error occured");
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
         }
 
         internal static void MostPopularSongOfArtist(string artistName)
