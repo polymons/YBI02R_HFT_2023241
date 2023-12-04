@@ -21,6 +21,7 @@ namespace YBI02R_HFT_2023241.Test
         Mock<IRepository<Song>> songRepoMock;
         StatLogic statLogic;
 
+
         [SetUp]
         public void Init()
         {
@@ -60,6 +61,7 @@ namespace YBI02R_HFT_2023241.Test
             songLogic = new SongLogic(songRepoMock.Object);
         }
 
+
         [Test]
         public void CreateArtist_ShouldCreateArtist()
         {
@@ -72,6 +74,7 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             artistRepoMock.Verify(son => son.Create(testArtist), Times.Once);
         }
+
 
         [Test]
         public void CreatePublisher_ShouldCreatePublisher()
@@ -86,7 +89,74 @@ namespace YBI02R_HFT_2023241.Test
             publisherRepoMock.Verify(pub => pub.Create(createdPublisher), Times.Once);
         }
 
-        //CreateSong_ShouldCreateSong string title, string genre, int length,int plays, int songID, int artistID
+
+        [Test]
+        public void CreateSong_ShouldCreateSong()
+        {
+            // Arrange
+            string title = "Song Title";
+            string genre = "Pop";
+            int length = 180;
+            int plays = 1000;
+            int songID = 1;
+            int artistID = 1;
+            var song = new Song(title, genre, length, plays, songID, artistID);
+            var songRepoMock = new Mock<IRepository<Song>>();
+            var songLogic = new SongLogic(songRepoMock.Object);
+
+            // Act
+            songLogic.Create(song);
+
+            // Assert
+            songRepoMock.Verify(repo => repo.Create(song), Times.Once);
+        }
+
+
+        [Test]
+        public void DeleteArtist_ShouldDeleteArtist()
+        {
+            // Arrange
+            int artistId = 1;
+            var artistToDelete = new Artist(artistId, "Artist to Delete", 3000, 20);
+            artistRepoMock.Setup(repo => repo.Read(artistId)).Returns(artistToDelete);
+
+            // Act
+            artistLogic.Delete(artistId);
+
+            // Assert
+            artistRepoMock.Verify(repo => repo.Delete(artistToDelete.ArtistID), Times.Once);
+        }
+
+        [Test]
+        public void DeletePublisher_ShouldDeletePublisher()
+        {
+            // Arrange
+            int publisherId = 1;
+            var publisherToDelete = new Publisher("US", "Publisher to Delete", "City", publisherId);
+            publisherRepoMock.Setup(repo => repo.Read(publisherId)).Returns(publisherToDelete);
+
+            // Act
+            publisherLogic.Delete(publisherId);
+
+            // Assert
+            publisherRepoMock.Verify(repo => repo.Delete(publisherToDelete.StudioID), Times.Once);
+        }
+
+        [Test]
+        public void DeleteSong_ShouldDeleteSong()
+        {
+            // Arrange
+            int songId = 1;
+            var songToDelete = new Song("Song Title", "Pop", 180, 1000, songId, 1);
+            songRepoMock.Setup(repo => repo.Read(songId)).Returns(songToDelete);
+
+            // Act
+            songLogic.Delete(songId);
+
+            // Assert
+            songRepoMock.Verify(repo => repo.Delete(songToDelete.SongID), Times.Once);
+        }
+
 
         [Test]
         public void ArtistHomeCity_ReturnsCorrectCity()
@@ -107,6 +177,7 @@ namespace YBI02R_HFT_2023241.Test
             Assert.AreEqual(expectedCity, result);
         }
 
+
         [Test]
         public void ArtistWithMostSongs_ReturnsArtistWithMostSongs()
         {
@@ -125,6 +196,7 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             Assert.AreEqual(artist2, result);
         }
+
 
         [Test]
         public void GetAllArtists_ReturnsAllArtists()
@@ -148,6 +220,7 @@ namespace YBI02R_HFT_2023241.Test
             Assert.AreEqual(expectedArtists, result);
         }
 
+
         [Test]
         public void OldestArtistAge_ReturnsOldestArtistAge()
         {
@@ -165,12 +238,13 @@ namespace YBI02R_HFT_2023241.Test
             Assert.AreEqual(78, result);
         }
 
+
         //[Test]
         //public void LongestSong_ReturnsLongestSong()
         //{
         //    // Arrange
-        //    var song1 = new Song("Song1", "R&B", 200,1, 1, 1);
-        //    var song2 = new Song("Song2","Pop", 3000,2, 2, 1);
+        //    var song1 = new Song("Song1", "R&B", 200, 1, 1, 1);
+        //    var song2 = new Song("Song2", "Pop", 3000, 2, 2, 1);
         //    var songRepoMock = new Mock<IRepository<Song>>();
         //    songRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Song> { song1, song2 }.AsQueryable());
         //    var statLogic = new StatLogic(null, null, songRepoMock.Object);
@@ -181,6 +255,8 @@ namespace YBI02R_HFT_2023241.Test
         //    // Assert
         //    Assert.AreEqual(song2, result);
         //}
+
+
         //[Test]
         //public void AvgSongLengthForArtist_ReturnsAvgSongLengthForArtist()
         //{
@@ -199,6 +275,7 @@ namespace YBI02R_HFT_2023241.Test
         //    // Assert
         //    Assert.AreEqual(250, result);
         //}
+
 
         //[Test]
         //public void MostPopularArtist_ReturnsMostPopularArtist()
@@ -219,6 +296,7 @@ namespace YBI02R_HFT_2023241.Test
         //    Assert.AreEqual(artist2, result);
         //}
 
+
         //[Test]
         //public void MostPopularSongOfArtist_ReturnsMostPopularSongOfArtist()
         //{
@@ -237,6 +315,7 @@ namespace YBI02R_HFT_2023241.Test
         //    // Assert
         //    Assert.AreEqual("Song2", result.Name);
         //}
+
 
         //[Test]
         //public void MinutesListenedToPublisher_ReturnsMinutesListenedToPublisher()
@@ -258,6 +337,7 @@ namespace YBI02R_HFT_2023241.Test
         //    // Assert
         //    Assert.AreEqual(25, result);
         //}
+
 
         [Test]
         public void ArtistHomeCity_ReturnsArtistHomeCity()
