@@ -57,5 +57,11 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
         {
             return stats.MinutesListenedToPublisher(publisherName);
         }
+
+        [HttpGet]
+        public string ArtistHomeCity(string artistName)
+        {
+            return stats.ArtistHomeCity(artistName);
+        }
     }
 }

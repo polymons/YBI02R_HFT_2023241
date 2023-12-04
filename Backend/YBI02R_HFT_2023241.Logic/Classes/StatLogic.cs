@@ -20,6 +20,11 @@ namespace YBI02R_HFT_2023241.Logic.Classes
             this.publisherRepo = publisherRepo;
         }
 
+        public string ArtistHomeCity(string artistName)
+        {
+            return artistRepo.ReadAll().FirstOrDefault(x => x.Name == artistName).Studio.City;
+        }
+
         public Artist ArtistWithMostSongs()
         {
             return artistRepo.ReadAll().OrderByDescending(x => x.Songs.Count).FirstOrDefault();
@@ -78,7 +83,10 @@ namespace YBI02R_HFT_2023241.Logic.Classes
 
         public Song MostPopularSongOfArtist(string artistName)
         {
-            throw new System.NotImplementedException();
+            return artistRepo.ReadAll().Where(x => x.Name == artistName)
+                .SelectMany(x => x.Songs)
+                .OrderByDescending(x => x.Length)
+                .FirstOrDefault();
         }
 
         public int? OldestArtistAge()
