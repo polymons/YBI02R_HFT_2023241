@@ -46,10 +46,5 @@ namespace YBI02R_HFT_2023241.Models
             StudioName = studioName;
             City = studioCity;
         }
-        //public Publisher(string country, string studioName)
-        //{
-        //    Country = country;
-        //    StudioName = studioName;
-        //}
     }
 }
