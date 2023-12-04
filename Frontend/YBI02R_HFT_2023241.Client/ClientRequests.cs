@@ -36,11 +36,11 @@ namespace YBI02R_HFT_2023241.Client
                 case ("Artist"):
                     try
                     {
-                        Console.Write("Enter artist name:");
+                        Console.Write("Enter artist name: ");
                         string newArtistName = Console.ReadLine();
-                        Console.Write("Enter artist StudioID:");
+                        Console.Write("Enter artist StudioID: ");
                         int newArtistStudio = int.Parse(Console.ReadLine());
-                        Console.Write("Enter age:");
+                        Console.Write("Enter age: ");
                         int newArtistAge = int.Parse(Console.ReadLine());
                         _rest.Post(new Artist(newArtistName, newArtistStudio, newArtistAge), "Artist");
                     }
@@ -52,11 +52,11 @@ namespace YBI02R_HFT_2023241.Client
                 case ("Publisher"):
                     try
                     {
-                        Console.Write("Enter publisher name:");
+                        Console.Write("Enter publisher name: ");
                         string pubName = Console.ReadLine();
-                        Console.Write("Enter publisher country:");
+                        Console.Write("Enter publisher country: ");
                         string pubCountry = Console.ReadLine();
-                        Console.Write("Enter studio city:");
+                        Console.Write("Enter studio city: ");
                         string pubCity = Console.ReadLine();
                         _rest.Post(new Publisher(pubCountry, pubName, pubCity), "Publisher");
                     }
@@ -109,14 +109,14 @@ namespace YBI02R_HFT_2023241.Client
 
         internal void Update(string entity)
         {
-            Console.WriteLine($"Enter the wanted {entity}'s ID");
-            int updateid = int.Parse(Console.ReadLine());
+            Console.Write($"Enter the wanted {entity}'s ID: ");
+            int updateId = int.Parse(Console.ReadLine());
             switch (entity)
             {
                 case "Song":
                     try
                     {
-                        Song songUpdate = _rest.GetId<Song>(updateid, "Song/");
+                        Song songUpdate = _rest.GetId<Song>(updateId, "Song/");
                         Console.Write($"Enter new song title (old: {songUpdate?.Title}):");
                         string newSongTitle = Console.ReadLine();
                         Console.Write($"Enter new song artist id (old: {songUpdate?.ArtistID}):");
@@ -139,7 +139,7 @@ namespace YBI02R_HFT_2023241.Client
                 case "Artist":
                     try
                     {
-                        Artist artistUpdate = _rest.GetId<Artist>(updateid, "Artist/");
+                        Artist artistUpdate = _rest.GetId<Artist>(updateId, "Artist/");
                         Console.Write($"Enter new artist studio ID (old: {artistUpdate?.StudioID}):");
                         int newArtistStudioID = int.Parse(Console.ReadLine());
                         Console.Write($"Enter new artist name (old: {artistUpdate?.Name}):");
@@ -159,7 +159,7 @@ namespace YBI02R_HFT_2023241.Client
                 case "Publisher":
                     try
                     {
-                        Publisher publisherUpdate = _rest.GetId<Publisher>(updateid, "Publisher/");
+                        Publisher publisherUpdate = _rest.GetId<Publisher>(updateId, "Publisher/");
                         Console.Write($"Enter new publisher name (old: {publisherUpdate?.StudioName}):");
                         string newPublisherName = Console.ReadLine();
                         Console.Write($"Enter the new publisher's country (old: {publisherUpdate?.Country}):");
@@ -185,7 +185,7 @@ namespace YBI02R_HFT_2023241.Client
 
         internal void Delete(string entity)
         {
-            Console.WriteLine($"Enter {entity} id to delete:");
+            Console.Write($"Enter {entity} id to delete: ");
             int del = int.Parse(Console.ReadLine());
             switch (entity)
             {
