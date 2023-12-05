@@ -8,7 +8,7 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
     [ApiController]
     public class StatController : ControllerBase, IStatLogic
     {
-        IStatLogic stats;
+        readonly IStatLogic stats;
 
         public StatController(IStatLogic statLogic)
         {

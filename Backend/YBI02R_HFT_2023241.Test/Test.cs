@@ -206,7 +206,7 @@ namespace YBI02R_HFT_2023241.Test
             var artist2 = new Artist(2, "Artist2", 25, 40);
             artist2.Songs = new List<Song> { song2, song3 };
             var artists = new List<Artist> { artist1, artist2 };
-            artistRepoMock.Setup(repo => repo.ReadAll()).Returns(artists.AsQueryable()); 
+            artistRepoMock.Setup(repo => repo.ReadAll()).Returns(artists.AsQueryable());
             var statLogic = new StatLogic(songRepoMock.Object, artistRepoMock.Object, null);
 
             // Act
@@ -370,7 +370,7 @@ namespace YBI02R_HFT_2023241.Test
             var result = Math.Round((double)statLogic.MinutesListenedToPublisher(publisherName), 2);
 
             // Assert
-            Assert.AreEqual(44.0d, result); 
+            Assert.AreEqual(44.0d, result);
         }
 
         [Test]

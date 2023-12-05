@@ -7,7 +7,7 @@ namespace YBI02R_HFT_2023241.Logic.Classes
 {
     public class ArtistLogic : IArtistLogic
     {
-        IRepository<Artist> artistRepo;
+        readonly IRepository<Artist> artistRepo;
         public ArtistLogic(IRepository<Artist> artistRepo)
         {
             this.artistRepo = artistRepo;
@@ -17,27 +17,27 @@ namespace YBI02R_HFT_2023241.Logic.Classes
         #region CRUD methods
         public void Create(Artist item)
         {
-            this.artistRepo.Create(item);
+            artistRepo.Create(item);
         }
 
         public void Delete(int id)
         {
-            this.artistRepo.Delete(id);
+            artistRepo.Delete(id);
         }
 
         public Artist Read(int id)
         {
-            return this.artistRepo.Read(id);
+            return artistRepo.Read(id);
         }
 
         public IQueryable<Artist> ReadAll()
         {
-            return this.artistRepo.ReadAll();
+            return artistRepo.ReadAll();
         }
 
         public void Update(Artist item)
         {
-            this.artistRepo.Update(item);
+            artistRepo.Update(item);
         }
         #endregion
 

@@ -32,7 +32,7 @@ namespace YBI02R_HFT_2023241.Repository.Repositories.Repo
             {
                 _musicDbContext.Set<T>().Remove(Read(id));
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 //incoming id is outside of range/null
             }

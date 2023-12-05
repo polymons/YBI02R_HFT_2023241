@@ -7,7 +7,7 @@ namespace YBI02R_HFT_2023241.Logic.Classes
 {
     public class SongLogic : ISongLogic
     {
-        IRepository<Song> songRepo;
+        readonly IRepository<Song> songRepo;
         public SongLogic(IRepository<Song> songRepo)
         {
             this.songRepo = songRepo;
@@ -17,27 +17,27 @@ namespace YBI02R_HFT_2023241.Logic.Classes
         #region CRUD methods
         public void Create(Song item)
         {
-            this.songRepo.Create(item);
+            songRepo.Create(item);
         }
 
         public void Delete(int id)
         {
-            this.songRepo.Delete(id);
+            songRepo.Delete(id);
         }
 
         public Song Read(int id)
         {
-            return this.songRepo.Read(id);
+            return songRepo.Read(id);
         }
 
         public IQueryable<Song> ReadAll()
         {
-            return this.songRepo.ReadAll();
+            return songRepo.ReadAll();
         }
 
         public void Update(Song item)
         {
-            this.songRepo.Update(item);
+            songRepo.Update(item);
         }
         #endregion
 

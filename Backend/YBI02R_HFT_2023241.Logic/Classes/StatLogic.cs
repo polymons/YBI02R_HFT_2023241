@@ -8,9 +8,9 @@ namespace YBI02R_HFT_2023241.Logic.Classes
 {
     public class StatLogic : IStatLogic
     {
-        IRepository<Song> songRepo;
-        IRepository<Artist> artistRepo;
-        IRepository<Publisher> publisherRepo;
+        readonly IRepository<Song> songRepo;
+        readonly IRepository<Artist> artistRepo;
+        readonly IRepository<Publisher> publisherRepo;
 
         public StatLogic(IRepository<Song> songRepo, IRepository<Artist> artistRepo, IRepository<Publisher> publisherRepo)
         {
@@ -90,7 +90,7 @@ namespace YBI02R_HFT_2023241.Logic.Classes
 
         public int? OldestArtistAge()
         {
-            return this.artistRepo.ReadAll().Max(x => x.Age);
+            return artistRepo.ReadAll().Max(x => x.Age);
         }
     }
 }

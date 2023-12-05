@@ -11,7 +11,7 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
     public class ArtistController : ControllerBase
     {
 
-        IArtistLogic logic;
+        readonly IArtistLogic logic;
 
         public ArtistController(IArtistLogic logic)
         {
@@ -23,32 +23,32 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
         [HttpGet]
         public IEnumerable<Artist> ReadAll()
         {
-            return this.logic.ReadAll();
+            return logic.ReadAll();
         }
         // GET api/<ArtistController>/5
         [HttpGet("{id}")]
         public Artist Read(int id)
         {
-            return this.logic.Read(id);
+            return logic.Read(id);
         }
         // POST api/<ArtistController>
         [HttpPost]
         public void Create([FromBody] Artist value)
         {
-            this.logic.Create(value);
+            logic.Create(value);
         }
         // PUT api/<ArtistController>/5
         [HttpPut("{id}")]
         //[HttpPut]
         public void Update([FromBody] Artist id)
         {
-            this.logic.Update(id);
+            logic.Update(id);
         }
         // DELETE api/<ArtistController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            this.logic.Delete(id);
+            logic.Delete(id);
         }
         #endregion
     }

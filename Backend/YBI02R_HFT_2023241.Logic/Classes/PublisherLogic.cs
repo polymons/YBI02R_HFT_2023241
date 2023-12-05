@@ -7,7 +7,7 @@ namespace YBI02R_HFT_2023241.Logic.Classes
 {
     public class PublisherLogic : IPublisherLogic
     {
-        IRepository<Publisher> publisherRepo;
+        readonly IRepository<Publisher> publisherRepo;
         public PublisherLogic(IRepository<Publisher> publisherRepo)
         {
             this.publisherRepo = publisherRepo;
@@ -17,27 +17,27 @@ namespace YBI02R_HFT_2023241.Logic.Classes
         #region CRUD methods
         public void Create(Publisher item)
         {
-            this.publisherRepo.Create(item);
+            publisherRepo.Create(item);
         }
 
         public void Delete(int id)
         {
-            this.publisherRepo.Delete(id);
+            publisherRepo.Delete(id);
         }
 
         public Publisher Read(int id)
         {
-            return this.publisherRepo.Read(id);
+            return publisherRepo.Read(id);
         }
 
         public IQueryable<Publisher> ReadAll()
         {
-            return this.publisherRepo.ReadAll();
+            return publisherRepo.ReadAll();
         }
 
         public void Update(Publisher item)
         {
-            this.publisherRepo.Update(item);
+            publisherRepo.Update(item);
         }
         #endregion
     }
