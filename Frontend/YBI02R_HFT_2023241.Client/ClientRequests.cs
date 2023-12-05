@@ -54,11 +54,11 @@ namespace YBI02R_HFT_2023241.Client
                     {
                         Console.Write("Enter publisher name: ");
                         string pubName = Console.ReadLine();
-                        Console.Write("Enter publisher country: ");
+                        Console.Write("Enter the publisher's two letter country code: ");
                         string pubCountry = Console.ReadLine();
                         Console.Write("Enter studio city: ");
                         string pubCity = Console.ReadLine();
-                        _rest.Post(new Publisher(pubCountry, pubName, pubCity), "Publisher");
+                        _rest.Post(new Publisher(pubCountry.Substring(0, 2), pubName, pubCity), "Publisher");
                     }
                     catch (ArgumentException e)
                     {
