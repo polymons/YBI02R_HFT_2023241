@@ -277,7 +277,27 @@ namespace YBI02R_HFT_2023241.Test
         [Test]
         public void AvgSongLengthForArtist_ReturnsAvgSongLengthForArtist()
         {
+            // Arrange
+            var artist1 = new Artist(1, "Artist1", 20, 3000);
+            var song1 = new Song { Title = "Song1", Genre = "Rock", Length = 246, Plays = 5, SongID = 5 };
+            var song2 = new Song { Title = "Song2", Genre = "Rock", Length = 247, Plays = 6, SongID = 6 };
+            artist1.Songs = new List<Song> { song1, song2 };
 
+            var artist2 = new Artist(2, "Artist2", 25, 5000);
+            var song3 = new Song { Title = "Song3", Genre = "Pop", Length = 200, Plays = 10, SongID = 7 };
+            var song4 = new Song { Title = "Song4", Genre = "Pop", Length = 180, Plays = 8, SongID = 8 };
+            artist2.Songs = new List<Song> { song3, song4 };
+
+            var artistRepoMock = new Mock<IRepository<Artist>>();
+            artistRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist1, artist2 }.AsQueryable());
+
+            var statLogic = new StatLogic(null, artistRepoMock.Object, null);
+
+            // Act
+            var result = statLogic.AvgSongLengthForArtist("Artist1");
+
+            // Assert
+            Assert.AreEqual(246.5, result);
         }
 
 
@@ -331,7 +351,25 @@ namespace YBI02R_HFT_2023241.Test
         [Test]
         public void MinutesListenedToPublisher_ReturnsMinutesListenedToPublisher()
         {
+            // Arrange
+            var publisherName = "Publisher1";
+            var publisher = new Publisher("UK", "Publisher1", "City1", 20);
+            var artist1 = new Artist(1, "Artist1", 20, 3000);
+            var song1 = new Song { Title = "Song1", Genre = "Rock", Length = 246, Plays = 5, SongID = 5 };
+            var song2 = new Song { Title = "Song2", Genre = "Rock", Length = 247, Plays = 6, SongID = 6 };
+            artist1.Songs = new List<Song> { song1, song2 };
+            publisher.Artists = new List<Artist> { artist1 };
 
+            var publisherRepoMock = new Mock<IRepository<Publisher>>();
+            publisherRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Publisher> { publisher }.AsQueryable());
+
+            var statLogic = new StatLogic(null, null, publisherRepoMock.Object);
+
+            // Act
+            var result = statLogic.MinutesListenedToPublisher(publisherName);
+
+            // Assert
+            Assert.AreEqual(24.55, result); // Replace 24.55 with the expected result
         }
 
         [Test]
