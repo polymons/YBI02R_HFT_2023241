@@ -13,7 +13,7 @@ namespace YBI02R_HFT_2023241.Client
             _client = new ClientRequests(_rest);
 
             var mainMenu = new ConsoleMenu(args, level: 0)
-                .Add("Songs", () => EntityMenu(args,"Song").Show())
+                .Add("Songs", () => EntityMenu(args, "Song").Show())
                 .Add("Artists", () => EntityMenu(args, "Artist").Show())
                 .Add("Publishers", () => EntityMenu(args, "Publisher").Show())
                 //.Add("Stats", () => subMenu(args).Show())
@@ -74,8 +74,8 @@ namespace YBI02R_HFT_2023241.Client
                     .Add("Minutes listened to studio", () => _client.GetMinutesListenedToPublisher())
                     .Add("Exit", ConsoleMenu.Close);
                 default:
-                     return new ConsoleMenu(args, level: 2)
-                    .Add("Exit", ConsoleMenu.Close);
+                    return new ConsoleMenu(args, level: 2)
+                   .Add("Exit", ConsoleMenu.Close);
             }
         }
         #endregion

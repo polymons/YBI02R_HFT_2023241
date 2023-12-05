@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using YBI02R_HFT_2023241.Logic.Classes;
-using YBI02R_HFT_2023241.Logic.Interfaces;
 using YBI02R_HFT_2023241.Models;
 using YBI02R_HFT_2023241.Repository.Interfaces;
 
@@ -20,7 +19,6 @@ namespace YBI02R_HFT_2023241.Test
         SongLogic songLogic;
         Mock<IRepository<Song>> songRepoMock;
         StatLogic statLogic;
-
 
         [SetUp]
         public void Init()
@@ -63,6 +61,7 @@ namespace YBI02R_HFT_2023241.Test
             publisherLogic = new PublisherLogic(publisherRepoMock.Object);
             songLogic = new SongLogic(songRepoMock.Object);
         }
+
         [Test]
         public void CreateArtist_ShouldCreateArtist()
         {
@@ -174,14 +173,13 @@ namespace YBI02R_HFT_2023241.Test
             Assert.AreEqual(expectedCity, result);
         }
 
-
         [Test]
         public void ArtistWithMostSongs_ReturnsArtistWithMostSongs()
         {
             // Arrange
-            var artist1 = new Artist(1, "Artist1", 20, 3000);
+            var artist1 = new Artist(1, "Artist1", 20, 30);
             artist1.Songs = new List<Song> { new Song(), new Song() };
-            var artist2 = new Artist(2, "Artist2", 25, 4000);
+            var artist2 = new Artist(2, "Artist2", 25, 40);
             artist2.Songs = new List<Song> { new Song(), new Song(), new Song() };
             var artistRepoMock = new Mock<IRepository<Artist>>();
             artistRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist1, artist2 }.AsQueryable());
@@ -193,19 +191,30 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             Assert.AreEqual(artist2, result);
         }
-        //[Test]
-        //public void LongestSong_ReturnsLongestSong()
-        //{
-        //    // Arrange
-        //    var expectedSong = new Song { Title = "Money", Genre = "Rock", Length = 249, Plays = 8, SongID = 8 }.Title; // Longest song
 
-        //    // Act
-        //    var longestSong = statLogic.LongestSong().Title;
+        [Test]
+        public void LongestSong_ReturnsLongestSong()
+        {
+            // Arrange
+            var expected = new Song("Bohemian Rhapsody", "Rock", 354, 100000, 1, 1);
+            var song1 = new Song("Song 1", "Pop", 180, 1000, 2, 1);
+            var song2 = new Song("Song 2", "Hip Hop", 240, 2000, 3, 2);
+            var song3 = new Song("Song 3", "R&B", 210, 1500, 4, 2);
 
-        //    // Assert
-        //    Assert.AreEqual(expectedSong, longestSong);
-        //}
+            var artist1 = new Artist(1, "Artist1", 20, 30);
+            artist1.Songs = new List<Song> { song1, expected };
+            var artist2 = new Artist(2, "Artist2", 25, 40);
+            artist2.Songs = new List<Song> { song2, song3 };
+            var artists = new List<Artist> { artist1, artist2 };
+            artistRepoMock.Setup(repo => repo.ReadAll()).Returns(artists.AsQueryable()); 
+            var statLogic = new StatLogic(songRepoMock.Object, artistRepoMock.Object, null);
 
+            // Act
+            var longestSong = statLogic.LongestSong();
+
+            // Assert
+            Assert.AreEqual(expected, longestSong);
+        }
 
         [Test]
         public void GetAllArtists_ReturnsAllArtists()
@@ -229,6 +238,27 @@ namespace YBI02R_HFT_2023241.Test
             Assert.AreEqual(expectedArtists, result);
         }
 
+        [Test]
+        public void GetAllPublishers_ReturnsAllPublishers()
+        {
+            // Arrange
+            var expectedPublishers = new List<Publisher>
+            {
+                new Publisher { Country = "US", StudioName = "Universal Music Group", City = "Los Angeles", StudioID = 101 },
+                new Publisher { Country = "UK", StudioName = "Atlantic Records", City = "London", StudioID = 102 },
+                new Publisher { Country = "CA", StudioName = "Republic Records", City = "Toronto", StudioID = 103 },
+                new Publisher { Country = "UK", StudioName = "Central Cee Music", City = "London", StudioID = 104 },
+                new Publisher { Country = "UK", StudioName = "EMI", City = "London", StudioID = 105 }
+            }.AsQueryable();
+
+            publisherRepoMock.Setup(repo => repo.ReadAll()).Returns(expectedPublishers);
+
+            // Act
+            var result = publisherLogic.ReadAll();
+
+            // Assert
+            Assert.AreEqual(expectedPublishers, result);
+        }
 
         [Test]
         public void OldestArtistAge_ReturnsOldestArtistAge()
@@ -246,29 +276,101 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             Assert.AreEqual(78, result);
         }
+
         [Test]
         public void AvgSongLengthForArtist_ReturnsAvgSongLengthForArtist()
         {
+            // Arrange
+            var artist1 = new Artist(1, "Artist1", 20, 3000);
+            var song1 = new Song { Title = "Song1", Genre = "Rock", Length = 246, Plays = 5, SongID = 5 };
+            var song2 = new Song { Title = "Song2", Genre = "Rock", Length = 247, Plays = 6, SongID = 6 };
+            artist1.Songs = new List<Song> { song1, song2 };
 
+            var artist2 = new Artist(2, "Artist2", 25, 5000);
+            var song3 = new Song { Title = "Song3", Genre = "Pop", Length = 200, Plays = 10, SongID = 7 };
+            var song4 = new Song { Title = "Song4", Genre = "Pop", Length = 180, Plays = 8, SongID = 8 };
+            artist2.Songs = new List<Song> { song3, song4 };
+
+            var artistRepoMock = new Mock<IRepository<Artist>>();
+            artistRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist1, artist2 }.AsQueryable());
+
+            var statLogic = new StatLogic(null, artistRepoMock.Object, null);
+
+            // Act
+            var result = statLogic.AvgSongLengthForArtist("Artist1");
+
+            // Assert
+            Assert.AreEqual(246.5, result);
         }
-
 
         [Test]
         public void MostPopularArtist_ReturnsMostPopularArtist()
         {
-        }
+            // Arrange
+            var artist1 = new Artist(1, "Artist1", 20, 3000);
+            var song1 = new Song { Title = "Song1", Genre = "Rock", Length = 246, Plays = 5, SongID = 5 };
+            var song2 = new Song { Title = "Song2", Genre = "Rock", Length = 247, Plays = 6, SongID = 6 };
+            artist1.Songs = new List<Song> { song1, song2 };
 
+            var artist2 = new Artist(2, "Artist2", 25, 5000);
+            var song3 = new Song { Title = "Song3", Genre = "Pop", Length = 200, Plays = 10, SongID = 7 };
+            var song4 = new Song { Title = "Song4", Genre = "Pop", Length = 180, Plays = 8, SongID = 8 };
+            artist2.Songs = new List<Song> { song3, song4 };
+
+            var artistRepoMock = new Mock<IRepository<Artist>>();
+            artistRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist1, artist2 }.AsQueryable());
+
+            var statLogic = new StatLogic(null, artistRepoMock.Object, null);
+
+            // Act
+            var result = statLogic.MostPopularArtist();
+
+            // Assert
+            Assert.AreEqual(artist2, result);
+        }
 
         [Test]
         public void MostPopularSongOfArtist_ReturnsMostPopularSongOfArtist()
         {
-        }
+            // Arrange
+            var artist1 = new Artist(1, "Artist1", 20, 3000);
+            var song1 = new Song { Title = "Comfortably Numb", Genre = "Rock", Length = 246, Plays = 5, SongID = 5 };
+            var song2 = new Song { Title = "Another Brick in the Wall", Genre = "Rock", Length = 247, Plays = 6, SongID = 6 };
+            artist1.Songs = new List<Song> { song1, song2 };
+            var artistRepoMock = new Mock<IRepository<Artist>>();
+            artistRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Artist> { artist1 }.AsQueryable());
+            var statLogic = new StatLogic(null, artistRepoMock.Object, null);
 
+            // Act
+            var result = statLogic.MostPopularSongOfArtist("Artist1");
+
+            // Assert
+            Assert.AreEqual(song2, result);
+        }
 
         [Test]
         public void MinutesListenedToPublisher_ReturnsMinutesListenedToPublisher()
         {
+            // Arrange
+            var publisherName = "Publisher1";
+            var publisher = new Publisher("UK", "Publisher1", "City1", 20);
+            var artist1 = new Artist(1, "Artist1", 20, 3000);
+            var song1 = new Song { Title = "Song1", Genre = "Rock", Length = 246, Plays = 5, SongID = 5 };
+            var song2 = new Song { Title = "Song2", Genre = "Rock", Length = 247, Plays = 6, SongID = 6 };
+            artist1.Songs = new List<Song> { song1, song2 };
 
+            publisher.Artists = new List<Artist> { artist1 };
+
+            var publisherRepoMock = new Mock<IRepository<Publisher>>();
+            publisherRepoMock.Setup(repo => repo.ReadAll()).Returns(new List<Publisher> { publisher }.AsQueryable());
+
+            var statLogic = new StatLogic(null, null, publisherRepoMock.Object);
+
+            // Act
+            var result = Math.Round((double)statLogic.MinutesListenedToPublisher(publisherName), 2);
+
+            // Assert
+            Assert.AreEqual(44.0d, result); 
         }
 
         [Test]
