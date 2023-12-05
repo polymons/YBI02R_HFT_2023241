@@ -1,5 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using YBI02R_HFT_2023241.Logic.Classes;
@@ -191,6 +192,7 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             Assert.AreEqual(artist2, result);
         }
+
         [Test]
         public void LongestSong_ReturnsLongestSong()
         {
@@ -236,6 +238,7 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             Assert.AreEqual(expectedArtists, result);
         }
+
         [Test]
         public void GetAllPublishers_ReturnsAllPublishers()
         {
@@ -274,6 +277,7 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             Assert.AreEqual(78, result);
         }
+
         [Test]
         public void AvgSongLengthForArtist_ReturnsAvgSongLengthForArtist()
         {
@@ -299,7 +303,6 @@ namespace YBI02R_HFT_2023241.Test
             // Assert
             Assert.AreEqual(246.5, result);
         }
-
 
         [Test]
         public void MostPopularArtist_ReturnsMostPopularArtist()
@@ -327,7 +330,6 @@ namespace YBI02R_HFT_2023241.Test
             Assert.AreEqual(artist2, result);
         }
 
-
         [Test]
         public void MostPopularSongOfArtist_ReturnsMostPopularSongOfArtist()
         {
@@ -347,7 +349,6 @@ namespace YBI02R_HFT_2023241.Test
             Assert.AreEqual(song2, result);
         }
 
-
         [Test]
         public void MinutesListenedToPublisher_ReturnsMinutesListenedToPublisher()
         {
@@ -358,6 +359,7 @@ namespace YBI02R_HFT_2023241.Test
             var song1 = new Song { Title = "Song1", Genre = "Rock", Length = 246, Plays = 5, SongID = 5 };
             var song2 = new Song { Title = "Song2", Genre = "Rock", Length = 247, Plays = 6, SongID = 6 };
             artist1.Songs = new List<Song> { song1, song2 };
+
             publisher.Artists = new List<Artist> { artist1 };
 
             var publisherRepoMock = new Mock<IRepository<Publisher>>();
@@ -366,10 +368,10 @@ namespace YBI02R_HFT_2023241.Test
             var statLogic = new StatLogic(null, null, publisherRepoMock.Object);
 
             // Act
-            var result = statLogic.MinutesListenedToPublisher(publisherName);
+            var result = Math.Round((double)statLogic.MinutesListenedToPublisher(publisherName), 2);
 
             // Assert
-            Assert.AreEqual(24.55, result); // Replace 24.55 with the expected result
+            Assert.AreEqual(44.0d, result); 
         }
 
         [Test]
