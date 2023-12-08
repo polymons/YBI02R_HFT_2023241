@@ -14,9 +14,11 @@ namespace YBI02R_HFT_2023241.Models
         [StringLength(2)]
         public string Country { get; set; }
 
+        [StringLength(240)]
         public string City { get; set; }
 
         [Required]
+        [StringLength(240)]
         public string StudioName { get; set; }
 
         //[NotMapped]

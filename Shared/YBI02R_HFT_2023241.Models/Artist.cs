@@ -13,6 +13,7 @@ namespace YBI02R_HFT_2023241.Models
         public int ArtistID { get; set; }
 
         [Required]
+        [StringLength(240)]
         public string Name { get; set; }
 
         public int StudioID { get; set; }

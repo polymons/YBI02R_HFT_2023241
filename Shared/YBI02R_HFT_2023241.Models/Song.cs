@@ -14,6 +14,7 @@ namespace YBI02R_HFT_2023241.Models
         [Required]
         public string Title { get; set; }
 
+        [StringLength(240)]
         public string Genre { get; set; }
 
         public virtual Artist Artist { get; set; }
