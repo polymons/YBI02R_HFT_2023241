@@ -23,34 +23,34 @@ namespace YBI02R_HFT_2023241.WpfClient
         }
 
 
-        public RestCollection<Actor> Actors { get; set; }
+        public RestCollection<Song> Songs { get; set; }
 
-        private Actor selectedActor;
+        private Song selectedSong;
 
-        public Actor SelectedActor
+        public Song SelectedSong
         {
-            get { return selectedActor; }
+            get { return selectedSong; }
             set
             {
                 if (value != null)
                 {
-                    selectedActor = new Actor()
+                    selectedSong = new Song()
                     {
-                        ActorName = value.ActorName,
-                        ActorId = value.ActorId
+                        Title = value.Title,
+                        SongID = value.SongID
                     };
                     OnPropertyChanged();
-                    (DeleteActorCommand as RelayCommand).NotifyCanExecuteChanged();
+                    (DeleteSongCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
             }
         }
 
 
-        public ICommand CreateActorCommand { get; set; }
+        public ICommand CreateSongCommand { get; set; }
 
-        public ICommand DeleteActorCommand { get; set; }
+        public ICommand DeleteSongCommand { get; set; }
 
-        public ICommand UpdateActorCommand { get; set; }
+        public ICommand UpdateSongCommand { get; set; }
 
         public static bool IsInDesignMode
         {
@@ -66,20 +66,20 @@ namespace YBI02R_HFT_2023241.WpfClient
         {
             if (!IsInDesignMode)
             {
-                Actors = new RestCollection<Actor>("http://localhost:53910/", "actor", "hub");
-                CreateActorCommand = new RelayCommand(() =>
+                Songs = new RestCollection<Song>("http://localhost:53910/", "Song", "hub");
+                CreateSongCommand = new RelayCommand(() =>
                 {
-                    Actors.Add(new Actor()
+                    Songs.Add(new Song()
                     {
-                        ActorName = SelectedActor.ActorName
+                        Title = SelectedSong.Title
                     });
                 });
 
-                UpdateActorCommand = new RelayCommand(() =>
+                UpdateSongCommand = new RelayCommand(() =>
                 {
                     try
                     {
-                        Actors.Update(SelectedActor);
+                        Songs.Update(SelectedSong);
                     }
                     catch (ArgumentException ex)
                     {
@@ -88,15 +88,15 @@ namespace YBI02R_HFT_2023241.WpfClient
                     
                 });
 
-                DeleteActorCommand = new RelayCommand(() =>
+                DeleteSongCommand = new RelayCommand(() =>
                 {
-                    Actors.Delete(SelectedActor.ActorId);
+                    Songs.Delete(SelectedSong.SongID);
                 },
                 () =>
                 {
-                    return SelectedActor != null;
+                    return SelectedSong != null;
                 });
-                SelectedActor = new Actor();
+                SelectedSong = new Song();
             }
             
         }
