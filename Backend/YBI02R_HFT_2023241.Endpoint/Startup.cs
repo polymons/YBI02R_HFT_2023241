@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using YBI02R_HFT_2023241.Endpoint.Services;
 using YBI02R_HFT_2023241.Logic.Classes;
 using YBI02R_HFT_2023241.Logic.Interfaces;
 using YBI02R_HFT_2023241.Models;
@@ -27,17 +28,24 @@ namespace YBI02R_HFT_2023241.Endpoint
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<MusicDbContext>();
+            // Add DbContext service
+            services.AddTransient<MusicDbContext>(); // Add DbContext service
 
+            // Add Repository services
             services.AddTransient<IRepository<Song>, SongRepo>();
-            services.AddTransient<IRepository<Artist>, ArtistRepo>();
-            services.AddTransient<IRepository<Publisher>, PublisherRepo>();
+            services.AddTransient<IRepository<Artist>, ArtistRepo>(); 
+            services.AddTransient<IRepository<Publisher>, PublisherRepo>(); 
 
-            services.AddTransient<ISongLogic, SongLogic>();
-            services.AddTransient<IArtistLogic, ArtistLogic>();
-            services.AddTransient<IPublisherLogic, PublisherLogic>();
+            // Add Logic services
+            services.AddTransient<ISongLogic, SongLogic>(); 
+            services.AddTransient<IArtistLogic, ArtistLogic>(); 
+            services.AddTransient<IPublisherLogic, PublisherLogic>(); 
             services.AddTransient<IStatLogic, StatLogic>();
 
+            // Add SignalR service
+            services.AddSignalR();
+
+            // Add Controllers and Swagger services
             services.AddControllers();
             services.AddSwaggerGen(swagger => swagger.SwaggerDoc("v1", new OpenApiInfo { Title = "YBI02R_HFT_2023241.Endpoint", Version = "v1" }));
         }
@@ -61,13 +69,21 @@ namespace YBI02R_HFT_2023241.Endpoint
                 await context.Response.WriteAsJsonAsync(response);
             }));
 
+
+            app.UseCors(x => x
+                  .AllowCredentials()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .WithOrigins("http://localhost:28158"));
+
             app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }
