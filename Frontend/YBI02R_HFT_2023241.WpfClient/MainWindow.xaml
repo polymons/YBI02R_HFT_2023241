@@ -1,34 +1,24 @@
-﻿<Window x:Class="YBI02R_HFT_2023241.WpfClient.MainWindow"
+﻿<Window x:Class="YBI02R_HFT_2023241.WPFClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:YBI02R_HFT_2023241.WpfClient"
-        
+        xmlns:local="clr-namespace:YBI02R_HFT_2023241.WPFClient"
+        xmlns:vm="clr-namespace:YBI02R_HFT_2023241.WPFClient.ViewModels"
+        WindowStartupLocation="CenterScreen"
+        x:Name="ThisWindow"
         mc:Ignorable="d"
-        Title="Song Editor" Height="450" Width="800">
+        Title="Main Window" Height="200" Width="270">
     <Window.DataContext>
-        <local:MainWindowViewModel />
+        <vm:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <ListBox ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedSong}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Label Content="{Binding Title}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <StackPanel Grid.Column="1">
-            <Label Content="Name" Background="LightBlue" Padding="10" />
-            <TextBox Text="{Binding SelectedSong.Title}" Padding="10" Margin="0,0,0,30" />
-            <Button Content="Create Song" Command="{Binding CreateSongCommand}" Margin="10" Padding="10" />
-            <Button Content="Delete Song" Command="{Binding DeleteSongCommand}" Margin="10" Padding="10" />
-            <Button Content="Update Song" Command="{Binding UpdateSongCommand}" Margin="10" Padding="10" />
-            <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" />
-        </StackPanel>
+        <DockPanel>
+            <Button Padding="5" DockPanel.Dock="Top" Content="Edit Publisher table"      FontSize="15" Command="{Binding EditPublishersCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
+            <Button Padding="5" DockPanel.Dock="Top" Content="Edit Songs table"   FontSize="15" Command="{Binding EditSongsCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
+            <Button Padding="5" DockPanel.Dock="Top" Content="Edit Artists table"     FontSize="15" Command="{Binding EditArtistsCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
+            <Button Padding="5" DockPanel.Dock="Top" Content="NonCrud"    FontSize="15" Command="{Binding NonCRUDCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
+            <Label/>
+        </DockPanel>
     </Grid>
 </Window>

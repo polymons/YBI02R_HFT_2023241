@@ -6,10 +6,11 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace YBI02R_HFT_2023241.WpfClient
+namespace YBI02R_HFT_2023241.WPFClient
 {
     public class RestService
     {
@@ -239,10 +240,7 @@ namespace YBI02R_HFT_2023241.WpfClient
     }
     public class RestExceptionInfo
     {
-        public RestExceptionInfo()
-        {
-
-        }
+        public RestExceptionInfo() { }
         public string Msg { get; set; }
     }
     class NotifyService
@@ -408,7 +406,5 @@ namespace YBI02R_HFT_2023241.WpfClient
             }
 
         }
-
-
     }
 }

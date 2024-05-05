@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace YBI02R_HFT_2023241.WPFClient
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for NonCRUD.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class NonCRUD : Window
     {
-        public MainWindow()
+        public NonCRUD()
         {
             InitializeComponent();
         }
