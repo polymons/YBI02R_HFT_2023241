@@ -33,13 +33,13 @@ namespace YBI02R_HFT_2023241.Endpoint
 
             // Add Repository services
             services.AddTransient<IRepository<Song>, SongRepo>();
-            services.AddTransient<IRepository<Artist>, ArtistRepo>(); 
-            services.AddTransient<IRepository<Publisher>, PublisherRepo>(); 
+            services.AddTransient<IRepository<Artist>, ArtistRepo>();
+            services.AddTransient<IRepository<Publisher>, PublisherRepo>();
 
             // Add Logic services
-            services.AddTransient<ISongLogic, SongLogic>(); 
-            services.AddTransient<IArtistLogic, ArtistLogic>(); 
-            services.AddTransient<IPublisherLogic, PublisherLogic>(); 
+            services.AddTransient<ISongLogic, SongLogic>();
+            services.AddTransient<IArtistLogic, ArtistLogic>();
+            services.AddTransient<IPublisherLogic, PublisherLogic>();
             services.AddTransient<IStatLogic, StatLogic>();
 
             // Add SignalR service

@@ -1,14 +1,10 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using YBI02R_HFT_2023241.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using YBI02R_HFT_2023241.Models;
 
 namespace YBI02R_HFT_2023241.WpfClient
 {
@@ -69,7 +65,7 @@ namespace YBI02R_HFT_2023241.WpfClient
             if (!IsInDesignMode)
             {
                 Songs = new RestCollection<Song>("http://localhost:53910/", "song"/*, "hub"*/);
-                
+
                 CreateSongCommand = new RelayCommand(() =>
                 {
                     Songs.Add(new Song()
@@ -88,7 +84,7 @@ namespace YBI02R_HFT_2023241.WpfClient
                     {
                         ErrorMessage = ex.Message;
                     }
-                    
+
                 });
 
                 DeleteSongCommand = new RelayCommand(() =>
@@ -101,7 +97,7 @@ namespace YBI02R_HFT_2023241.WpfClient
                 });
                 SelectedSong = new Song();
             }
-            
+
         }
     }
 }

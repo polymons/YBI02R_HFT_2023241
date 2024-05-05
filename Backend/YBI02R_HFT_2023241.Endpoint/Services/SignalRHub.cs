@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using System.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
 
 namespace YBI02R_HFT_2023241.Endpoint.Services
 {
