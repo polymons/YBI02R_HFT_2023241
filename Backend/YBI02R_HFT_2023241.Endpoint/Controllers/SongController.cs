@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
+using YBI02R_HFT_2023241.Endpoint.Services;
 using YBI02R_HFT_2023241.Logic.Interfaces;
 using YBI02R_HFT_2023241.Models;
 
@@ -11,11 +13,13 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
     public class SongController : ControllerBase
     {
 
-        readonly ISongLogic logic;
+        private readonly ISongLogic logic;
+        private readonly IHubContext<SignalRHub> hub;
 
-        public SongController(ISongLogic logic)
+        public SongController(ISongLogic logic, IHubContext<SignalRHub> hub)
         {
             this.logic = logic;
+            this.hub = hub;
         }
 
         #region CRUD
@@ -36,6 +40,7 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
         public void Create([FromBody] Song value)
         {
             logic.Create(value);
+            this.hub.Clients.All.SendAsync("SongCreated", value);
         }
         // PUT api/<SongController>/5
         [HttpPut("{id}")]
@@ -43,12 +48,14 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
         public void Update([FromBody] Song id)
         {
             logic.Update(id);
+            this.hub.Clients.All.SendAsync("SongUpdated", id);
         }
         // DELETE api/<SongController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             logic.Delete(id);
+            this.hub.Clients.All.SendAsync("SongDeleted", id);
         }
         #endregion
     }

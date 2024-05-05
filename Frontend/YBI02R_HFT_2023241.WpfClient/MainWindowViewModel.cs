@@ -39,9 +39,11 @@ namespace YBI02R_HFT_2023241.WpfClient
                         Title = value.Title,
                         SongID = value.SongID
                     };
+
                     OnPropertyChanged();
                     (DeleteSongCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
+
             }
         }
 
@@ -66,7 +68,8 @@ namespace YBI02R_HFT_2023241.WpfClient
         {
             if (!IsInDesignMode)
             {
-                Songs = new RestCollection<Song>("http://localhost:53910/", "Song", "hub");
+                Songs = new RestCollection<Song>("http://localhost:53910/", "song"/*, "hub"*/);
+                
                 CreateSongCommand = new RelayCommand(() =>
                 {
                     Songs.Add(new Song()
