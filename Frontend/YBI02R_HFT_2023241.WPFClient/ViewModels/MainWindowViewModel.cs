@@ -11,7 +11,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
     partial class MainWindowViewModel
     {
         [RelayCommand]
-        public void EditPublishers(Window window)
+        public static void EditPublishers(Window window)
         {
             var PublisherWindow = new PublisherEditor();
             PublisherWindow.Show();
@@ -19,7 +19,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         }
 
         [RelayCommand]
-        public void EditSongs(Window window)
+        public static void EditSongs(Window window)
         {
             var SongWindow = new SongEditor();
             SongWindow.Show();
@@ -27,7 +27,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         }
 
         [RelayCommand]
-        public void EditArtists(Window window)
+        public static void EditArtists(Window window)
         {
             var ArtistWindow = new ArtistEditor();
             ArtistWindow.Show();
@@ -35,7 +35,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         }
 
         [RelayCommand]
-        public void NonCRUD(Window window)
+        public static void NonCRUD(Window window)
         {
             var Window = new NonCRUD();
             Window.Show();

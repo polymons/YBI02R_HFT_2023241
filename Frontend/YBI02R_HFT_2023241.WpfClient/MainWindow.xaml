@@ -13,11 +13,11 @@
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <DockPanel>
-            <Button Padding="5" DockPanel.Dock="Top" Content="Edit Publisher table"      FontSize="15" Command="{Binding EditPublishersCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
-            <Button Padding="5" DockPanel.Dock="Top" Content="Edit Songs table"   FontSize="15" Command="{Binding EditSongsCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
-            <Button Padding="5" DockPanel.Dock="Top" Content="Edit Artists table"     FontSize="15" Command="{Binding EditArtistsCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
-            <Button Padding="5" DockPanel.Dock="Top" Content="NonCrud"    FontSize="15" Command="{Binding NonCRUDCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
+        <DockPanel Margin="20">
+            <Button Padding="5" DockPanel.Dock="Top" Content="Publisher table"      FontSize="15" Command="{Binding EditPublishersCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
+            <Button Padding="5" DockPanel.Dock="Top" Content="Songs table"   FontSize="15" Command="{Binding EditSongsCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
+            <Button Padding="5" DockPanel.Dock="Top" Content="Artists table"     FontSize="15" Command="{Binding EditArtistsCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
+            <Button Padding="5" DockPanel.Dock="Top" Content="Non Crud"    FontSize="15" Command="{Binding NonCRUDCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
             <Label/>
         </DockPanel>
     </Grid>
