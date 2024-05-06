@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using YBI02R_HFT_2023241.Models;
+using YBI02R_HFT_2023241.WPFClient.Services;
 
 namespace YBI02R_HFT_2023241.WPFClient.ViewModels
 {

@@ -8,11 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using YBI02R_HFT_2023241.Models;
+using YBI02R_HFT_2023241.WPFClient.Services;
 
 namespace YBI02R_HFT_2023241.WPFClient.ViewModels
 {
     partial class PublisherEditorViewModel : ObservableRecipient
     {
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set { SetProperty(ref errorMessage, value); }
+        }
+
         private Publisher selectedItem;
         public Publisher SelectedItem
         {
@@ -38,14 +46,12 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                     InputID = value.StudioID;
                     InputStudioName = value.StudioName;
                     InputCountry = value.Country;
-                    InputCity = value.City;
                 }
                 else
                 {
                     InputID = null;
                     InputStudioName = null;
                     InputCountry = null;
-                    InputCity = null;
                 }
             }
         }
@@ -57,26 +63,20 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             set => SetProperty(ref inputID, value);
         }
 
-        private string inputStudioName;
-        public string InputStudioName
+        private string? inputStudioName;
+        public string? InputStudioName
         {
             get { return inputStudioName; }
             set => SetProperty(ref inputStudioName, value);
         }
 
-        private string inputCountry;
-        public string InputCountry
+        private string? inputCountry;
+        public string? InputCountry
         {
             get { return inputCountry; }
             set => SetProperty(ref inputCountry, value);
         }
 
-        private string inputCity;
-        public string InputCity
-        {
-            get { return inputCity; }
-            set => SetProperty(ref inputCity, value);
-        }
 
         public bool IsButtonExecutable()
         {
@@ -96,16 +96,16 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         {
             if (!IsInDesignMode)
             {
-                Publishers = new RestCollection<Publisher>("http://localhost:53910/", "publisher", "hub");
+                Publishers = new RestCollection<Publisher>("http://localhost:53910/", "Publisher", "hub");
             }
         }
 
         [RelayCommand]
         public void Create()
         {
-            if (InputID != null && InputStudioName != null && InputStudioName != "" && InputCountry != null && InputCity != null)
+            if (InputID != null && InputStudioName != null && InputStudioName != "" && InputCountry != null)
             {
-                Publishers.Add(new Publisher(InputCountry, InputStudioName, InputCity, (int)InputID));
+                Publishers.Add(new Publisher(InputCountry, InputStudioName, (int)InputID));
             }
             else { MessageBox.Show("Wrong Input!"); }
             SelectedItem = null;
@@ -114,13 +114,20 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand(CanExecute = nameof(IsButtonExecutable))]
         public void Update()
         {
-            if (InputID != null && InputStudioName != null && InputStudioName != "" && InputCountry != null && InputCity != null)
+            if (InputID != null && !String.IsNullOrWhiteSpace(InputStudioName) && InputCountry != null)
             {
-                SelectedItem.StudioID = (int)InputID;
-                SelectedItem.StudioName = InputStudioName;
-                SelectedItem.Country = InputCountry;
-                SelectedItem.City = InputCity;
-                Publishers.Update(SelectedItem);
+                try
+                {
+                    SelectedItem.StudioID = (int)InputID;
+                    SelectedItem.StudioName = InputStudioName;
+                    SelectedItem.Country = InputCountry;
+
+                    Publishers.Update(SelectedItem);
+                }
+                catch (Exception ex)
+                {
+                    errorMessage = ex.Message;
+                }
             }
             else { MessageBox.Show("Wrong Input!"); }
             SelectedItem = null;

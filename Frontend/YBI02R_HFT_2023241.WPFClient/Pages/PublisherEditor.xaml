@@ -29,9 +29,9 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" FontSize="15" Content="{Binding Id}"/>
-                                <Label Grid.Column="1" FontSize="15" Content="{Binding Name}"/>
-                                <Label Grid.Column="2" FontSize="15" Content="{Binding Age}" ContentStringFormat="Age: {0}"/>
+                                <Label Grid.Column="0" FontSize="15" Content="{Binding StudioID}"/>
+                                <Label Grid.Column="1" FontSize="15" Content="{Binding StudioName}"/>
+                                <Label Grid.Column="2" FontSize="15" Content="{Binding Country}" ContentStringFormat="Age: {0}"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
@@ -52,11 +52,15 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="Id:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+
                 <Label Grid.Row="1" Grid.Column="0" Content="Name:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding InputName}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <Label Grid.Row="2" Grid.Column="0" Content="Age:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding InputAge}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <Label Grid.Row="3" Grid.ColumnSpan="2" Content="ID will not change on update!" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontStyle="Italic" Foreground="LightPink" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding InputStudioName}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Country:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding InputCountry}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+
+
+
             </Grid>
             <Button DockPanel.Dock="Top" Content="Create" FontSize="18" Padding="5" Margin="5 5 5 0" Command="{Binding CreateCommand}"/>
             <Button DockPanel.Dock="Top" Content="Update" FontSize="18" Padding="5" Margin="5 0 5 0" Command="{Binding UpdateCommand}"/>

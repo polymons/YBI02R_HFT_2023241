@@ -10,17 +10,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using YBI02R_HFT_2023241.Models;
+using YBI02R_HFT_2023241.WPFClient.Services;
 
 namespace YBI02R_HFT_2023241.WPFClient.ViewModels
 {
     partial class SongEditorViewModel : ObservableRecipient
     {
-        //private string errorMessage;
-        //public string ErrorMessage
-        //{
-        //    get { return errorMessage; }
-        //    set { SetProperty(ref errorMessage, value); }
-        //}
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set { SetProperty(ref errorMessage, value); }
+        }
 
         private Song selectedItem;
         public Song SelectedItem
@@ -44,18 +45,35 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 SetProperty(ref inputItem, value);
                 if (value != null)
                 {
+                    InputSongID = value.SongID;
                     InputTitle = value.Title;
-                    InputArtistID = value.ArtistID;
                     InputGenre = value.Genre;
+                    InputArtistID = value.ArtistID;
+                    InputArtist = value.Artist;
                 }
                 else
                 {
+                    InputSongID = null;
                     InputTitle = null;
-                    InputArtistID = null;
                     InputGenre = null;
-
+                    InputArtistID = null;
+                    InputArtist = null;
                 }
             }
+        }
+
+        private Artist inputArtist;
+        public Artist InputArtist
+        {
+            get { return inputArtist; }
+            set => SetProperty(ref inputArtist, value);
+        }
+
+        private int? inputSongID;
+        public int? InputSongID
+        {
+            get { return inputSongID; }
+            set => SetProperty(ref inputSongID, value);
         }
 
         private string inputTitle;
@@ -78,7 +96,6 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             get { return inputArtistID; }
             set => SetProperty(ref inputArtistID, value);
         }
-
 
         public bool IsButtonExecutable()
         {
@@ -110,6 +127,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             {
                 var song = new Song
                 {
+
                     Title = InputTitle,
                     Genre = InputGenre,
                     ArtistID = (int)InputArtistID
@@ -128,10 +146,18 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         {
             if (SelectedItem != null && !string.IsNullOrWhiteSpace(InputTitle) && !string.IsNullOrWhiteSpace(InputGenre) && InputArtistID != null)
             {
-                SelectedItem.Title = InputTitle;
-                SelectedItem.Genre = InputGenre;
-                SelectedItem.ArtistID = (int)InputArtistID;
-                Songs.Update(SelectedItem);
+                try
+                {
+                    SelectedItem.Title = InputTitle;
+                    SelectedItem.Genre = InputGenre;
+                    SelectedItem.ArtistID = (int)InputArtistID;
+
+                    Songs.Update(SelectedItem);
+                }
+                catch (Exception ex)
+                {
+                    errorMessage = ex.Message;
+                }
             }
             else
             {
@@ -143,7 +169,14 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand(CanExecute = nameof(IsButtonExecutable))]
         public void Delete()
         {
-            Songs.Delete(SelectedItem.SongID);
+            try
+            {
+                Songs.Delete(SelectedItem.SongID);
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+            }   
             SelectedItem = null;
         }
 

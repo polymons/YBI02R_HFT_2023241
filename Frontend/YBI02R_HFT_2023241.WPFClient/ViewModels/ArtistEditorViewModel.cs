@@ -3,6 +3,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.ComponentModel;
 using System.Windows;
 using YBI02R_HFT_2023241.Models;
+using YBI02R_HFT_2023241.WPFClient.Services;
 
 namespace YBI02R_HFT_2023241.WPFClient.ViewModels
 {
@@ -93,7 +94,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         {
             if (!IsInDesignMode)
             {
-                Artists = new RestCollection<Artist>("http://localhost:53910/", "artist", "hub");
+                Artists = new RestCollection<Artist>("http://localhost:53910/", "Artist", "hub");
             }
         }
 
