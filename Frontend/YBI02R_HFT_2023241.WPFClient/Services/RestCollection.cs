@@ -93,7 +93,7 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
 
         public async Task<T> GetSingleAsync<T>(string endpoint)
         {
-            T item = default;
+            T item = default(T);
             HttpResponseMessage response = await client.GetAsync(endpoint);
             if (response.IsSuccessStatusCode)
             {
@@ -109,7 +109,7 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
 
         public T GetSingle<T>(string endpoint)
         {
-            T item = default;
+            T item = default(T);
             HttpResponseMessage response = client.GetAsync(endpoint).GetAwaiter().GetResult();
             if (response.IsSuccessStatusCode)
             {
@@ -125,7 +125,7 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
 
         public async Task<T> GetAsync<T>(int id, string endpoint)
         {
-            T item = default;
+            T item = default(T);
             HttpResponseMessage response = await client.GetAsync(endpoint + "/" + id.ToString());
             if (response.IsSuccessStatusCode)
             {
@@ -141,7 +141,7 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
 
         public T Get<T>(int id, string endpoint)
         {
-            T item = default;
+            T item = default(T);
             HttpResponseMessage response = client.GetAsync(endpoint + "/" + id.ToString()).GetAwaiter().GetResult();
             if (response.IsSuccessStatusCode)
             {
@@ -262,7 +262,7 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
 
         public void AddHandler<T>(string methodname, Action<T> value)
         {
-            conn.On(methodname, value);
+            conn.On<T>(methodname, value);
         }
 
         public async void Init()
@@ -285,16 +285,16 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
         public RestCollection(string baseurl, string endpoint, string hub = null)
         {
             hasSignalR = hub != null;
-            rest = new RestService(baseurl, endpoint);
+            this.rest = new RestService(baseurl, endpoint);
             if (hub != null)
             {
-                notify = new NotifyService(baseurl + hub);
-                notify.AddHandler(type.Name + "Created", (T item) =>
+                this.notify = new NotifyService(baseurl + hub);
+                this.notify.AddHandler<T>(type.Name + "Created", (T item) =>
                 {
                     items.Add(item);
                     CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 });
-                notify.AddHandler(type.Name + "Deleted", (T item) =>
+                this.notify.AddHandler<T>(type.Name + "Deleted", (T item) =>
                 {
                     var element = items.FirstOrDefault(t => t.Equals(item));
                     if (element != null)
@@ -308,12 +308,12 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
                     }
 
                 });
-                notify.AddHandler(type.Name + "Updated", (T item) =>
+                this.notify.AddHandler<T>(type.Name + "Updated", (T item) =>
                 {
                     Init();
                 });
 
-                notify.Init();
+                this.notify.Init();
             }
             Init();
         }
@@ -346,11 +346,11 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
         {
             if (hasSignalR)
             {
-                rest.PostAsync(item, typeof(T).Name);
+                this.rest.PostAsync(item, typeof(T).Name);
             }
             else
             {
-                rest.PostAsync(item, typeof(T).Name).ContinueWith((t) =>
+                this.rest.PostAsync(item, typeof(T).Name).ContinueWith((t) =>
                 {
                     Init().ContinueWith(z =>
                     {
@@ -368,11 +368,11 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
         {
             if (hasSignalR)
             {
-                rest.PutAsync(item, typeof(T).Name);
+                this.rest.PutAsync(item, typeof(T).Name);
             }
             else
             {
-                rest.PutAsync(item, typeof(T).Name).ContinueWith((t) =>
+                this.rest.PutAsync(item, typeof(T).Name).ContinueWith((t) =>
                 {
                     Init().ContinueWith(z =>
                     {
@@ -389,11 +389,11 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
         {
             if (hasSignalR)
             {
-                rest.DeleteAsync(id, typeof(T).Name);
+                this.rest.DeleteAsync(id, typeof(T).Name);
             }
             else
             {
-                rest.DeleteAsync(id, typeof(T).Name).ContinueWith((t) =>
+                this.rest.DeleteAsync(id, typeof(T).Name).ContinueWith((t) =>
                 {
                     Init().ContinueWith(z =>
                     {
