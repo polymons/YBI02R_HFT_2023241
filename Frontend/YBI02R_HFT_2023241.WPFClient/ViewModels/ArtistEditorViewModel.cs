@@ -30,14 +30,14 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 SetProperty(ref inputItem, value);
                 if (value != null)
                 {
-                    InputId = value.ArtistID;
+                    InputID = value.ArtistID;
                     InputName = value.Name;
                     InputStudioID = value.StudioID;
                     InputAge = value.Age; 
                 }
                 else
                 {
-                    InputId = null;
+                    InputID = null;
                     InputName = null;
                     InputStudioID = null; 
                     InputAge = null;
@@ -45,11 +45,11 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             }
         }
 
-        private int? inputId;
-        public int? InputId
+        private int? inputID;
+        public int? InputID
         {
-            get { return inputId; }
-            set => SetProperty(ref inputId, value);
+            get { return inputID; }
+            set => SetProperty(ref inputID, value);
         }
 
         private string inputName;
@@ -100,9 +100,9 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand]
         public void Create()
         {
-            if (InputId != null && InputName != null && InputName != "" && InputStudioID != null && InputAge != null)
+            if (InputID != null && InputName != null && InputName != "" && InputStudioID != null && InputAge != null)
             {
-                Artists.Add(new Artist((int)InputId, InputName, (int)InputStudioID, (int)InputAge));
+                Artists.Add(new Artist((int)InputID, InputName, (int)InputStudioID, (int)InputAge));
             }
             else { MessageBox.Show("Wrong Input!"); }
             SelectedItem = null;
@@ -111,9 +111,9 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand(CanExecute = nameof(IsButtonExecutable))]
         public void Update()
         {
-            if (InputId != null && InputName != null && InputName != "" && InputStudioID != null && InputAge != null)
+            if (InputID != null && InputName != null && InputName != "" && InputStudioID != null && InputAge != null)
             {
-                SelectedItem.ArtistID = (int)InputId;
+                SelectedItem.ArtistID = (int)InputID;
                 SelectedItem.Name = InputName;
                 SelectedItem.StudioID = (int)InputStudioID;
                 SelectedItem.Age = (int)InputAge;

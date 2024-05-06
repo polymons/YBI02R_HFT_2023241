@@ -35,14 +35,14 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 SetProperty(ref inputItem, value);
                 if (value != null)
                 {
-                    InputId = value.StudioID;
+                    InputID = value.StudioID;
                     InputStudioName = value.StudioName;
                     InputCountry = value.Country;
                     InputCity = value.City;
                 }
                 else
                 {
-                    InputId = null;
+                    InputID = null;
                     InputStudioName = null;
                     InputCountry = null;
                     InputCity = null;
@@ -50,11 +50,11 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             }
         }
 
-        private int? inputId;
-        public int? InputId
+        private int? inputID;
+        public int? InputID
         {
-            get { return inputId; }
-            set => SetProperty(ref inputId, value);
+            get { return inputID; }
+            set => SetProperty(ref inputID, value);
         }
 
         private string inputStudioName;
@@ -103,9 +103,9 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand]
         public void Create()
         {
-            if (InputId != null && InputStudioName != null && InputStudioName != "" && InputCountry != null && InputCity != null)
+            if (InputID != null && InputStudioName != null && InputStudioName != "" && InputCountry != null && InputCity != null)
             {
-                Publishers.Add(new Publisher(InputCountry, InputStudioName, InputCity, (int)InputId));
+                Publishers.Add(new Publisher(InputCountry, InputStudioName, InputCity, (int)InputID));
             }
             else { MessageBox.Show("Wrong Input!"); }
             SelectedItem = null;
@@ -114,9 +114,9 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand(CanExecute = nameof(IsButtonExecutable))]
         public void Update()
         {
-            if (InputId != null && InputStudioName != null && InputStudioName != "" && InputCountry != null && InputCity != null)
+            if (InputID != null && InputStudioName != null && InputStudioName != "" && InputCountry != null && InputCity != null)
             {
-                SelectedItem.StudioID = (int)InputId;
+                SelectedItem.StudioID = (int)InputID;
                 SelectedItem.StudioName = InputStudioName;
                 SelectedItem.Country = InputCountry;
                 SelectedItem.City = InputCity;

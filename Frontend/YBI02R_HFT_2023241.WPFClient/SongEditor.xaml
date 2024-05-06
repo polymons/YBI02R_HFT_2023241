@@ -11,64 +11,58 @@
     mc:Ignorable="d"
     Title="SongEditor" Height="450" Width="800">
     <Window.DataContext>
-    <vm:SongEditorViewModel/>
+        <vm:SongEditorViewModel/>
     </Window.DataContext>
     <Grid>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="1*"/>
-        <ColumnDefinition Width="1*"/>
-    </Grid.ColumnDefinitions>
-    <DockPanel Grid.Column="0">
-        <ListBox Margin="5" ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedItem}" HorizontalContentAlignment="Stretch">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-            <Border BorderThickness="1" BorderBrush="Gray">
-                <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" FontSize="15" Content="{Binding Id}"/>
-                <Label Grid.Column="1" FontSize="15" Content="{Binding Name}"/>
-                <Label Grid.Column="2" FontSize="15" Content="{Binding Artist}"/>
-                </Grid>
-            </Border>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-        </ListBox>
-    </DockPanel>
-    <DockPanel Grid.Column="1">
-        <Grid DockPanel.Dock="Top" Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-        </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Id:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputId}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-        <Label Grid.Row="1" Grid.Column="0" Content="Name:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding InputName}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Artist:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding InputArtist}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="Album:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding InputAlbum}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-        <Label Grid.Row="4" Grid.Column="0" Content="Genre:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding InputGenre}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-        <Label Grid.Row="5" Grid.ColumnSpan="2" Content="ID will not change on update!" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontStyle="Italic" Foreground="LightPink" BorderBrush="Gray" BorderThickness="1"/>
-        </Grid>
-        <Button DockPanel.Dock="Top" Content="Create" FontSize="18" Padding="5" Margin="5 5 5 0" Command="{Binding CreateCommand}"/>
-        <Button DockPanel.Dock="Top" Content="Update" FontSize="18" Padding="5" Margin="5 0 5 0" Command="{Binding UpdateCommand}"/>
-        <Button DockPanel.Dock="Top" Content="Delete" FontSize="18" Padding="5" Margin="5 0 5 5" Command="{Binding DeleteCommand}"/>
-        <Button DockPanel.Dock="Bottom" Content="Return" FontSize="18" Padding="5" Margin="5 0 5 5" Command="{Binding ReturnCommand}" CommandParameter="{Binding ElementName=SongEditorWindow}"/>
-        <Label/>
-    </DockPanel>
+        <DockPanel Grid.Column="0">
+            <ListBox Margin="5" ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedItem}" HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="Gray">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" FontSize="15" Content="{Binding Title}"/>
+                                <Label Grid.Column="2" FontSize="15" Content="{Binding Genre}"/>
+                                <Label Grid.Column="1" FontSize="15" Content="{Binding ArtistID}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+            <Grid DockPanel.Dock="Top" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="1" Grid.Column="0" Content="Title:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding InputTitle}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Genre:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding InputGenre}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="Artist ID:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding InputArtistID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <Label Grid.Row="4" Grid.ColumnSpan="2" Content="ID will not change on update!" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontStyle="Italic" Foreground="LightPink" BorderBrush="Gray" BorderThickness="1"/>
+            </Grid>
+            <Button DockPanel.Dock="Top" Content="Create" FontSize="18" Padding="5" Margin="5 5 5 0" Command="{Binding CreateCommand}"/>
+            <Button DockPanel.Dock="Top" Content="Update" FontSize="18" Padding="5" Margin="5 0 5 0" Command="{Binding UpdateCommand}"/>
+            <Button DockPanel.Dock="Top" Content="Delete" FontSize="18" Padding="5" Margin="5 0 5 5" Command="{Binding DeleteCommand}"/>
+            <Button DockPanel.Dock="Bottom" Content="Return" FontSize="18" Padding="5" Margin="5 0 5 5" Command="{Binding ReturnCommand}" CommandParameter="{Binding ElementName=SongEditorWindow}"/>
+        </DockPanel>
     </Grid>
 </Window>

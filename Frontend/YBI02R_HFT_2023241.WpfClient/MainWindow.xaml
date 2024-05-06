@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         x:Name="ThisWindow"
         mc:Ignorable="d"
-        Title="Main Window" Height="200" Width="270">
+        Title="Main Window" Height="300" Width="280">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>

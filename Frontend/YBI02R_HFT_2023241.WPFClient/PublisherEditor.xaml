@@ -51,7 +51,7 @@
                     <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="Id:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputId}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
                 <Label Grid.Row="1" Grid.Column="0" Content="Name:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding InputName}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="Age:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>

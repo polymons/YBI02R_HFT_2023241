@@ -4,15 +4,24 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using YBI02R_HFT_2023241.Models;
 
 namespace YBI02R_HFT_2023241.WPFClient.ViewModels
 {
     partial class SongEditorViewModel : ObservableRecipient
     {
+        //private string errorMessage;
+        //public string ErrorMessage
+        //{
+        //    get { return errorMessage; }
+        //    set { SetProperty(ref errorMessage, value); }
+        //}
+
         private Song selectedItem;
         public Song SelectedItem
         {
@@ -29,63 +38,47 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         private Song inputItem;
         public Song InputItem
         {
-            get { return inputItem; }
+            get => inputItem;
             set
             {
                 SetProperty(ref inputItem, value);
                 if (value != null)
                 {
-                    InputId = value.SongID;
-                    InputName = value.Title;
-                    InputBirthyear = value.Length;
-                    InputWeight = value.Plays;
-                    InputColor = value.ArtistID;
+                    InputTitle = value.Title;
+                    InputArtistID = value.ArtistID;
+                    InputGenre = value.Genre;
                 }
                 else
                 {
-                    InputId = null;
-                    InputName = null;
-                    InputBirthyear = null;
-                    InputWeight = null;
-                    InputColor = null;
+                    InputTitle = null;
+                    InputArtistID = null;
+                    InputGenre = null;
+
                 }
             }
         }
 
-        private int? inputId;
-        public int? InputId
+        private string inputTitle;
+        public string InputTitle
         {
-            get { return inputId; }
-            set => SetProperty(ref inputId, value);
+            get { return inputTitle; }
+            set => SetProperty(ref inputTitle, value);
         }
 
-        private string inputName;
-        public string InputName
+        private string? inputGenre;
+        public string? InputGenre
         {
-            get { return inputName; }
-            set => SetProperty(ref inputName, value);
+            get { return inputGenre; }
+            set => SetProperty(ref inputGenre, value);
         }
 
-        private int? inputBirthyear;
-        public int? InputBirthyear
+        private int? inputArtistID;
+        public int? InputArtistID
         {
-            get { return inputBirthyear; }
-            set => SetProperty(ref inputBirthyear, value);
+            get { return inputArtistID; }
+            set => SetProperty(ref inputArtistID, value);
         }
 
-        private int? inputWeight;
-        public int? InputWeight
-        {
-            get { return inputWeight; }
-            set => SetProperty(ref inputWeight, value);
-        }
-
-        private int? inputColor;
-        public int? InputColor
-        {
-            get { return inputColor; }
-            set => SetProperty(ref inputColor, value);
-        }
 
         public bool IsButtonExecutable()
         {
@@ -101,36 +94,49 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 return (bool)DependencyPropertyDescriptor.FromProperty(prop, typeof(FrameworkElement)).Metadata.DefaultValue;
             }
         }
+
         public SongEditorViewModel()
         {
             if (!IsInDesignMode)
             {
-                Songs = new RestCollection<Song>("http://localhost:53910/", "song", "hub");
+                Songs = new RestCollection<Song>("http://localhost:53910/", "Song", "hub");
             }
         }
 
         [RelayCommand]
         public void Create()
         {
-            if (InputId != null && InputName != null && InputName != "" && InputBirthyear != null && InputWeight != null && InputColor != null)
+            if (!string.IsNullOrWhiteSpace(InputTitle) && !string.IsNullOrWhiteSpace(InputGenre) && InputArtistID != null)
             {
-                Songs.Add(new Song(InputName, null, (int)InputBirthyear, (int)InputWeight, (int)InputId, (int)InputColor));
+                var song = new Song
+                {
+                    Title = InputTitle,
+                    Genre = InputGenre,
+                    ArtistID = (int)InputArtistID
+                };
+                Songs.Add(song);
             }
-            else { MessageBox.Show("Wrong Input!"); }
+            else
+            {
+                MessageBox.Show("Please fill in all fields correctly!");
+            }
             SelectedItem = null;
         }
 
         [RelayCommand(CanExecute = nameof(IsButtonExecutable))]
         public void Update()
         {
-            if (InputId != null && InputName != null && InputName != "" && InputBirthyear != null && InputWeight != null && InputColor != null)
+            if (SelectedItem != null && !string.IsNullOrWhiteSpace(InputTitle) && !string.IsNullOrWhiteSpace(InputGenre) && InputArtistID != null)
             {
-                SelectedItem.Title = InputName;
-                SelectedItem.Length = (int)InputBirthyear;
-                SelectedItem.Plays = (int)InputWeight;
+                SelectedItem.Title = InputTitle;
+                SelectedItem.Genre = InputGenre;
+                SelectedItem.ArtistID = (int)InputArtistID;
                 Songs.Update(SelectedItem);
             }
-            else { MessageBox.Show("Wrong Input!"); }
+            else
+            {
+                MessageBox.Show("Please fill in all fields correctly!");
+            }
             SelectedItem = null;
         }
 
