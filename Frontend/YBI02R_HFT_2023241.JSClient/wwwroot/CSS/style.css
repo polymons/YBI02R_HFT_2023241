@@ -36,3 +36,7 @@ table {
 #updateId {
     color: darkred;
 }
+#formDiv {
+    width: 50%;
+    align-self: left;
+}
