@@ -1,14 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Printing;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using YBI02R_HFT_2023241.Models;
 using YBI02R_HFT_2023241.WPFClient.Services;
 
@@ -175,7 +169,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             {
                 ResponseMessage = ex.Message;
                 ResponseMessage = "Failed";
-            }   
+            }
             SelectedItem = null;
         }
 

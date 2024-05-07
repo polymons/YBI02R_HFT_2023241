@@ -39,12 +39,12 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 {
                     InputName = value.Name;
                     InputStudioID = value.StudioID;
-                    InputAge = value.Age; 
+                    InputAge = value.Age;
                 }
                 else
                 {
                     InputName = null;
-                    InputStudioID = null; 
+                    InputStudioID = null;
                     InputAge = null;
                 }
             }
@@ -65,14 +65,14 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         }
 
         private int? inputStudioID;
-        public int? InputStudioID 
+        public int? InputStudioID
         {
             get { return inputStudioID; }
             set => SetProperty(ref inputStudioID, value);
         }
 
         private int? inputAge;
-        public int? InputAge 
+        public int? InputAge
         {
             get { return inputAge; }
             set => SetProperty(ref inputAge, value);

@@ -1,16 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using YBI02R_HFT_2023241.Models;
 using YBI02R_HFT_2023241.WPFClient.Services;
 
@@ -119,9 +113,9 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand]
         public void AvgSongLengthForArtist()
         {
-            if (InputName == null)return;
-            try 
-            { 
+            if (InputName == null) return;
+            try
+            {
                 Display = new();
                 var avgLength = restService.GetString<double?>(InputName, "/Stat/AvgSongLengthForArtist?artistName=");
                 Display.Add(new ShowItem($"The average song length for {InputName} is: {avgLength}"));
