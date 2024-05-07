@@ -274,8 +274,8 @@ namespace YBI02R_HFT_2023241.Client
             {
                 Console.Write("Enter the name of the artist: ");
                 string artistName = Console.ReadLine();
-                var avgLenght = _rest.GetString<double?>(artistName, "/Stat/AvgSongLengthForArtist?artistName=");
-                Console.WriteLine($"The average song-length of {artistName} is: {avgLenght}");
+                var avgLength = _rest.GetString<double?>(artistName, "/Stat/AvgSongLengthForArtist?artistName=");
+                Console.WriteLine($"The average song-length of {artistName} is: {avgLength}");
                 Console.ReadLine();
             }
             catch (Exception ex)

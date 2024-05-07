@@ -63,18 +63,37 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         string? inputName;
         public string? InputName
         {
-            get {return inputName;}
-            set {SetProperty(ref inputName, value); }
+            //check if inputName is in Artist collection
+            get { return inputName; }
+            set
+            {
+                if (value != null)
+                {
+                    var artists = restService.Get<Artist>("Artist").Select(a => a.Name).ToArray();
+                    if (artists.Contains(value))
+                    {
+                        SetProperty(ref inputName, value);
+                    }
+                    else
+                    {
+                        ResponseMessage = "Artist not found";
+                    }
+                }
+            }
         }
+
+        #region Artist stats
 
         [RelayCommand]
         public void MostPopularSongOfArtist()
         {
+            if (InputName == null) return;
             try
             {
                 Display = new();
                 var no1Song = restService.GetString<Song>(InputName, "/Stat/MostPopularSongOfArtist?artistName=");
                 Display.Add(new ShowItem($"The most popular song of {InputName} is: {no1Song.Title} by {no1Song.Artist.Name}"));
+                ResponseMessage = "";
             }
             catch (Exception ex)
             {
@@ -84,11 +103,13 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand]
         public void ArtistHomeCity()
         {
+            if (InputName == null) return;
             try
             {
                 Display = new();
-                Artist artist = restService.GetSingle<Artist>($"Stat/ArtistHomeCity/{InputName}");
-                Display.Add(new ShowItem($"{InputName} is from {artist.Studio.City}"));
+                var homeCity = restService.GetString<string>(InputName, "/Stat/ArtistHomeCity?artistName=");
+                Display.Add(new ShowItem($"The home town of {InputName} is: {homeCity}"));
+                ResponseMessage = "";
             }
             catch (Exception ex)
             {
@@ -98,18 +119,22 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand]
         public void AvgSongLengthForArtist()
         {
+            if (InputName == null)return;
             try 
             { 
                 Display = new();
-                double? avgSongLength = restService.GetSingle<double>($"Stat/AvgSongLengthForArtist/{InputName}");
-                Display.Add(new ShowItem($"The average song length for {InputName} is: {avgSongLength}"));
+                var avgLength = restService.GetString<double?>(InputName, "/Stat/AvgSongLengthForArtist?artistName=");
+                Display.Add(new ShowItem($"The average song length for {InputName} is: {avgLength}"));
+                ResponseMessage = "";
             }
             catch (Exception ex)
             {
                 ResponseMessage = ex.Message;
             }
         }
+        #endregion
 
+        #region General Stats
         [RelayCommand]
         public void ArtistWithMostSongs()
         {
@@ -133,16 +158,6 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             Display.Add(new ShowItem($"The longest song is: {longestSong.Title} by {longestSong.Artist.Name}"));
         }
         //[RelayCommand]
-        //public void MinutesListenedToPublisher()
-        //{
-        //    Display = new();
-        //    double? minutesListened = restService.GetSingle<double>($"Stat/MinutesListenedToPublisher/{InputName}");
-        //    Display.Add(new ShowItem($"Minutes listened to {InputName} is: {minutesListened}"));
-        //}
-
-
-
-        //[RelayCommand]
         //public void SongStats()
         //{
         //    Display = new();
@@ -153,8 +168,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         //        Display.Add(new ShowItem(item.ToString()));
         //    }
         //}
-
-
+        #endregion
 
         [RelayCommand]
         public void Return(Window thisWindow)
