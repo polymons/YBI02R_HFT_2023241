@@ -90,6 +90,21 @@ namespace YBI02R_HFT_2023241.WPFClient.Services
             }
             return items;
         }
+        public T GetString<T>(string data, string endpoint)
+        {
+            T item = default(T);
+            HttpResponseMessage response = client.GetAsync(endpoint + data.ToString()).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+            }
+            else
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
+            return item;
+        }
 
         public async Task<T> GetSingleAsync<T>(string endpoint)
         {
