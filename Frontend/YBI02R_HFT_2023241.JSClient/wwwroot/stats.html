@@ -10,7 +10,7 @@
 <body>
     <h1 class="display-2">Statistics</h1>
     <div id="NonCrudControls" class="container px-5">
-        <div class="row">
+        <div class="row" >
             <div id="nonCrudButtons" class="btn-group-vertical col">
                 <h2>Artist statistics</h2>
                     <div class="mb-2" id="formDiv" class="container px-5 col">
@@ -18,27 +18,30 @@
                     </div>
                 <span class="label label-default"></span>
                 <button type="button" class="btn btn-success" onclick="MostPopularSongOfArtist()">Most popular song of artist</button>
+                <button type="button" class="btn btn-success" onclick="ArtistHomeCity()">Artist home city</button>
+                <button type="button" class="btn btn-success" onclick="AvgSongLengthForArtist()">Average song length</button>
 
                 <h2>General Statistics</h2>
                 <span class="label label-default"></span>
                 <button type="button" class="btn btn-success" onclick="MostPopularArtist()">Most popular artist</button>
-                <button type="button" class="btn btn-success" onclick="SongStats()">List Song Stats</button>
-
+                <button type="button" class="btn btn-success" onclick="ArtistWithMostSongs()">Artist with most songs</button>
+                <button type="button" class="btn btn-success" onclick="LongestSong()">Longest song</button>
             </div>
-        </div>
-        
+            <!-- RESULTS -->
+            <div class="btn-group-vertical col" id="results">
+                <table class="table table-striped">
+                    <thead id="displayHeader">
+                        <tr>
+                            <th colspan="2">Results</th>
+                        </tr>
+                    </thead>
+                    <tbody id="displayItems">
+                    </tbody>
+                </table>
+            </div>
+        </div>  
     </div>
-    <div class="container pt-5">
-        <table class="table table-striped">
-            <thead id="displayHeader">
-                <tr>
-                    <th colspan="5">Results</th>
-                </tr>
-            </thead>
-            <tbody id="displayItems">
-            </tbody>
-        </table>
-    </div>
+
     <script src="Scripts/stats.js"></script>
 </body>
 </html>

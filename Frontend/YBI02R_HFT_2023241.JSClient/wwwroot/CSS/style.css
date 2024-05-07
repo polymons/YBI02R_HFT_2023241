@@ -1,14 +1,31 @@
-﻿h1 {
+﻿body{
+
+    font-family: 'Roboto', sans-serif;
+}
+button {
+    background-color: rgb(96, 213, 221);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+h1 {
     text-align: center;
 }
 table {
     width: 90%;
     margin: auto;
-    border: 1px solid rgb(25, 135, 84);
+    border: 1px solid rgb(25, 45, 135);
 }
 #displayHeader {
     text-align: center;
-    background-color: rgb(25, 135, 84);
+    background-color: rgb(72, 161, 132);
     color: white;
     font-style: italic;
 }
@@ -17,10 +34,13 @@ table {
 }
 #displayItems tr, #displayItems td {
     text-align: center;
-    border: 1px solid rgb(25, 135, 84);
+    border: 1px solid rgb(62, 175, 141);
 }
 #displayItems td {
     width: 25%;
+}
+#nonCrudButtons {
+    margin-top: 5%;
 }
 #nonCrudButtons button {
     width: 370px;
@@ -38,5 +58,9 @@ table {
 }
 #formDiv {
     width: 50%;
-    align-self: left;
+    
+}
+#results {
+    margin-top: 10%;
+    position: relative;
 }
