@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         x:Name="ArtistEditorWindow"
         mc:Ignorable="d"
-        Title="Artist Editor" Height="450" Width="800">
+        Title="Artist Editor" Height="550" Width="800">
     <Window.DataContext>
         <vm:ArtistEditorViewModel/>
     </Window.DataContext>
@@ -45,21 +45,29 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <!--<RowDefinition Height="45"/>-->
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="Id:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <Label Grid.Row="1" Grid.Column="0" Content="Name:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding InputName}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <Label Grid.Row="2" Grid.Column="0" Content="Studio ID:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding InputStudioID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <Label Grid.Row="3" Grid.Column="0" Content="Age:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding InputAge}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <Label Grid.Row="4" Grid.ColumnSpan="2" Content="ID will not change on update!" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontStyle="Italic" Foreground="LightPink" BorderBrush="Gray" BorderThickness="1"/>
+                <!--<Label Grid.Row="0" Grid.Column="0" Content="Id:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>-->
+                
+                <Label Grid.Row="0" Grid.Column="0" Content="Name:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputName}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                
+                <Label Grid.Row="1" Grid.Column="0" Content="Studio ID:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding InputStudioID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                
+                <Label Grid.Row="2" Grid.Column="0" Content="Age:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding InputAge}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+
+                <Label Grid.Row="3" Grid.ColumnSpan="2" Content="ID will not change on update!" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontStyle="Italic" Foreground="DarkBlue" Background="PaleGreen" BorderBrush="Gray" BorderThickness="1"/>
+
+                <Label Grid.Row="4" Grid.ColumnSpan="2" Content="{Binding ResponseMessage}" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="LightPink" Background="Azure" BorderBrush="Gray" BorderThickness="1"/>
+                
             </Grid>
             <Button DockPanel.Dock="Top" Content="Create" FontSize="18" Padding="5" Margin="5 5 5 0" Command="{Binding CreateCommand}"/>
             <Button DockPanel.Dock="Top" Content="Update" FontSize="18" Padding="5" Margin="5 0 5 0" Command="{Binding UpdateCommand}"/>

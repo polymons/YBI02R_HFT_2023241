@@ -14,11 +14,11 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
 {
     partial class PublisherEditorViewModel : ObservableRecipient
     {
-        private string errorMessage;
-        public string ErrorMessage
+        private string responseMessage;
+        public string ResponseMessage
         {
-            get { return errorMessage; }
-            set { SetProperty(ref errorMessage, value); }
+            get { return responseMessage; }
+            set { SetProperty(ref responseMessage, value); }
         }
 
         private Publisher selectedItem;
@@ -111,10 +111,10 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    errorMessage = ex.Message;
+                    ResponseMessage = ex.Message;
                 }       
             }
-            else { MessageBox.Show("Wrong Input!"); }
+            else { ResponseMessage= "Wrong Input!"; }
             SelectedItem = null;
         }
 
@@ -133,10 +133,10 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    errorMessage = ex.Message;
+                    ResponseMessage = ex.Message;
                 }
             }
-            else { MessageBox.Show("Wrong Input!"); }
+            else { ResponseMessage = "Wrong Input!"; }
             SelectedItem = null;
         }
 

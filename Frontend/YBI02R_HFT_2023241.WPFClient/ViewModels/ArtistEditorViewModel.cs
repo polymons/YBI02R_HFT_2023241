@@ -9,6 +9,13 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
 {
     partial class ArtistEditorViewModel : ObservableRecipient
     {
+        private string responseMessage;
+        public string ResponseMessage
+        {
+            get { return responseMessage; }
+            set { SetProperty(ref responseMessage, value); }
+        }
+
         private Artist selectedItem;
         public Artist SelectedItem
         {
@@ -21,7 +28,6 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 UpdateCommand.NotifyCanExecuteChanged();
             }
         }
-
         private Artist inputItem;
         public Artist InputItem
         {
@@ -31,14 +37,12 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 SetProperty(ref inputItem, value);
                 if (value != null)
                 {
-                    InputID = value.ArtistID;
                     InputName = value.Name;
                     InputStudioID = value.StudioID;
                     InputAge = value.Age; 
                 }
                 else
                 {
-                    InputID = null;
                     InputName = null;
                     InputStudioID = null; 
                     InputAge = null;
@@ -46,15 +50,15 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             }
         }
 
-        private int? inputID;
-        public int? InputID
-        {
-            get { return inputID; }
-            set => SetProperty(ref inputID, value);
-        }
+        //private int? inputID;
+        //public int? InputID
+        //{
+        //    get { return inputID; }
+        //    set => SetProperty(ref inputID, value);
+        //}
 
-        private string inputName;
-        public string InputName
+        private string? inputName;
+        public string? InputName
         {
             get { return inputName; }
             set => SetProperty(ref inputName, value);
@@ -89,7 +93,6 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 return (bool)DependencyPropertyDescriptor.FromProperty(prop, typeof(FrameworkElement)).Metadata.DefaultValue;
             }
         }
-
         public ArtistEditorViewModel()
         {
             if (!IsInDesignMode)
@@ -101,26 +104,27 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand]
         public void Create()
         {
-            if (InputID != null && InputName != null && InputName != "" && InputStudioID != null && InputAge != null)
+            if (InputName != null && InputName != "" && InputStudioID != null && InputAge != null)
             {
-                Artists.Add(new Artist((int)InputID, InputName, (int)InputStudioID, (int)InputAge));
+                Artists.Add(new Artist(InputName, (int)InputStudioID, (int)InputAge));
+                ResponseMessage = "Created";
             }
-            else { MessageBox.Show("Wrong Input!"); }
+            else { ResponseMessage = "Wrong input"; }
             SelectedItem = null;
         }
 
         [RelayCommand(CanExecute = nameof(IsButtonExecutable))]
         public void Update()
         {
-            if (InputID != null && InputName != null && InputName != "" && InputStudioID != null && InputAge != null)
+            if (InputName != null && InputName != "" && InputStudioID != null && InputAge != null)
             {
-                SelectedItem.ArtistID = (int)InputID;
                 SelectedItem.Name = InputName;
                 SelectedItem.StudioID = (int)InputStudioID;
                 SelectedItem.Age = (int)InputAge;
                 Artists.Update(SelectedItem);
+                ResponseMessage = "Updated";
             }
-            else { MessageBox.Show("Wrong Input!"); }
+            else { ResponseMessage = "Wrong input"; }
             SelectedItem = null;
         }
 
@@ -128,6 +132,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         public void Delete()
         {
             Artists.Delete(SelectedItem.ArtistID);
+            ResponseMessage = "Deleted";
             SelectedItem = null;
         }
 

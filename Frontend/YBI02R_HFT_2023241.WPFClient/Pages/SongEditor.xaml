@@ -34,8 +34,8 @@
                                 <Label Grid.Column="0" FontSize="15" Content="{Binding SongID}"/>
                                 <Label Grid.Column="1" FontSize="15" Content="{Binding Title}"/>
                                 <Label Grid.Column="2" FontSize="15" Content="{Binding Genre}"/>
-                                <Label Grid.Column="3" FontSize="15" Content="{Binding ArtistID}"/>
                                 <Label Grid.Column="4" FontSize="15" Content="{Binding Artist.Name}"/>
+                                <Label Grid.Column="3" FontSize="15" Content="{Binding ArtistID}"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
@@ -54,28 +54,20 @@
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
-                    <RowDefinition Height="45"/>
-                    <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0" Grid.Column="0" Content="Title:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputTitle}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
 
-                <Label Grid.Row="0" Grid.Column="0" Content="SongID:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputSongID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Genre:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding InputGenre}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
 
-                <Label Grid.Row="1" Grid.Column="0" Content="Title:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding InputTitle}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="ArtistID:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding InputArtistID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
 
-                <Label Grid.Row="2" Grid.Column="0" Content="Genre:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding InputGenre}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <Label Grid.Row="3" Grid.ColumnSpan="2" Content="ID will not change on update!" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontStyle="Normal" Foreground="DarkBlue" Background="PaleGreen" BorderBrush="Gray" BorderThickness="1"/>
 
-                <Label Grid.Row="3" Grid.Column="0" Content="ArtistID:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding InputArtistID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-
-                <Label Grid.Row="4" Grid.Column="0" Content="Artist:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding InputArtist.Name}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-
-                <Label Grid.Row="5" Grid.ColumnSpan="2" Content="ID will not change on update!" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontStyle="Normal" Foreground="DarkBlue" Background="PaleGreen" BorderBrush="Gray" BorderThickness="1"/>
-
-                <Label Grid.Row="6" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding ErrorMessage}" FontSize="18" Foreground="LightPink" Background="Azure" BorderBrush="Gray" BorderThickness="1"/>
+                <Label Grid.Row="4" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding ResponseMessage}" FontSize="18" Foreground="LightPink" Background="Azure" BorderBrush="Gray" BorderThickness="1"/>
             </Grid>
             <Button DockPanel.Dock="Top" Content="Create" FontSize="18" Padding="5" Margin="5 5 5 0" Command="{Binding CreateCommand}"/>
             <Button DockPanel.Dock="Top" Content="Update" FontSize="18" Padding="5" Margin="5 0 5 0" Command="{Binding UpdateCommand}"/>

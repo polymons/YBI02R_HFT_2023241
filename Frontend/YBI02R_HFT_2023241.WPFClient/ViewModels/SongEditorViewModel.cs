@@ -16,11 +16,11 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
 {
     partial class SongEditorViewModel : ObservableRecipient
     {
-        private string errorMessage;
-        public string ErrorMessage
+        private string responseMessage;
+        public string ResponseMessage
         {
-            get { return errorMessage; }
-            set { SetProperty(ref errorMessage, value); }
+            get { return responseMessage; }
+            set { SetProperty(ref responseMessage, value); }
         }
 
         private Song selectedItem;
@@ -45,19 +45,15 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                 SetProperty(ref inputItem, value);
                 if (value != null)
                 {
-                    InputSongID = value.SongID;
                     InputTitle = value.Title;
                     InputGenre = value.Genre;
                     InputArtistID = value.ArtistID;
-                    InputArtist = value.Artist;
                 }
                 else
                 {
-                    InputSongID = null;
                     InputTitle = null;
                     InputGenre = null;
                     InputArtistID = null;
-                    InputArtist = null;
                 }
             }
         }
@@ -76,8 +72,8 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             set => SetProperty(ref inputSongID, value);
         }
 
-        private string inputTitle;
-        public string InputTitle
+        private string? inputTitle;
+        public string? InputTitle
         {
             get { return inputTitle; }
             set => SetProperty(ref inputTitle, value);
@@ -136,7 +132,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             }
             else
             {
-                MessageBox.Show("Please fill in all fields correctly!");
+                ResponseMessage = "Please fill in all fields correctly!";
             }
             SelectedItem = null;
         }
@@ -153,15 +149,16 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
                     SelectedItem.ArtistID = (int)InputArtistID;
 
                     Songs.Update(SelectedItem);
+                    ResponseMessage = "Success";
                 }
                 catch (Exception ex)
                 {
-                    errorMessage = ex.Message;
+                    ResponseMessage = ex.Message;
                 }
             }
             else
             {
-                MessageBox.Show("Please fill in all fields correctly!");
+                ResponseMessage = "Please fill in all fields correctly!";
             }
             SelectedItem = null;
         }
@@ -172,10 +169,12 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             try
             {
                 Songs.Delete(SelectedItem.SongID);
+                ResponseMessage = "Success";
             }
             catch (Exception ex)
             {
-                errorMessage = ex.Message;
+                ResponseMessage = ex.Message;
+                ResponseMessage = "Failed";
             }   
             SelectedItem = null;
         }

@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         x:Name="PublisherEditorWindow"
         mc:Ignorable="d"
-        Title="PublisherEditor" Height="450" Width="800">
+        Title="PublisherEditor" Height="550" Width="800">
     <Window.DataContext>
         <vm:PublisherEditorViewModel/>
     </Window.DataContext>
@@ -62,7 +62,7 @@
 
                 <Label Grid.Row="3" Grid.ColumnSpan="2" Content="ID will not change on update!" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontStyle="Normal" Foreground="DarkBlue" Background="PaleGreen" BorderBrush="Gray" BorderThickness="1"/>
 
-                <Label Grid.Row="4" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding ErrorMessage}" FontSize="18" Foreground="LightPink" Background="Azure" BorderBrush="Gray" BorderThickness="1"/>
+                <Label Grid.Row="4" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding ResponseMessage}" FontSize="18" Foreground="LightPink" Background="Azure" BorderBrush="Gray" BorderThickness="1"/>
             </Grid>
             <Button DockPanel.Dock="Top" Content="Create" FontSize="18" Padding="5" Margin="5 5 5 0" Command="{Binding CreateCommand}"/>
             <Button DockPanel.Dock="Top" Content="Update" FontSize="18" Padding="5" Margin="5 0 5 0" Command="{Binding UpdateCommand}"/>
