@@ -43,8 +43,8 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
             this.hub.Clients.All.SendAsync("PublisherCreated", value);
         }
         // PUT api/<PublisherController>/5
-        [HttpPut("{id}")]
-        //[HttpPut]
+        //[HttpPut("{id}")]
+        [HttpPut]
         public void Update([FromBody] Publisher id)
         {
             logic.Update(id);
