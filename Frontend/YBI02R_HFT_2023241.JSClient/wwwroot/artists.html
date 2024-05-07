@@ -1,21 +1,24 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <title>Artist Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="CSS/style.css" rel="stylesheet" />
 </head>
+
 <body>
     <h1 class="display-2">Artist Editor</h1>
 
     <div id="formDiv" class="container px-5">
         <h2 class="display-3">Create</h2>
-        
+
         <div class="mb-2">
             <label class="form-label" for="itemId">ID</label>
-            <input type="text" id="itemId" class="form-control" readonly/>
+            <input type="text" id="itemId" class="form-control" readonly />
         </div>
 
         <div class="mb-2">
@@ -33,7 +36,7 @@
         <h2 class="display-3">Update</h2>
         <div class="mb-2">
             <label class="form-label">ID</label>
-            <input type="text" id="updateId" class="form-control" readonly/>
+            <input type="text" id="updateId" class="form-control" readonly />
         </div>
         <div class="mb-2">
             <label class="form-label">Name</label>
@@ -65,4 +68,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="Scripts/artist.js"></script>
 </body>
+
 </html>

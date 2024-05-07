@@ -141,7 +141,6 @@ function update() {
 		.catch((error) => {
 			console.error("Error:", error);
 		});
-
 	updateIdElement.value = null;
 	updateNameElement.value = null;
 	updateAgeElement.value = null;
