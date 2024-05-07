@@ -63,8 +63,8 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             set => SetProperty(ref inputID, value);
         }
 
-        private string? inputStudioName;
-        public string? InputStudioName
+        private string inputStudioName;
+        public string InputStudioName
         {
             get { return inputStudioName; }
             set => SetProperty(ref inputStudioName, value);
@@ -105,7 +105,14 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         {
             if (InputID != null && InputStudioName != null && InputStudioName != "" && InputCountry != null)
             {
-                Publishers.Add(new Publisher(InputCountry, InputStudioName, (int)InputID));
+                try
+                {
+                    Publishers.Add(new Publisher(InputCountry, InputStudioName, (int)InputID));
+                }
+                catch (Exception ex)
+                {
+                    errorMessage = ex.Message;
+                }       
             }
             else { MessageBox.Show("Wrong Input!"); }
             SelectedItem = null;
@@ -114,7 +121,7 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
         [RelayCommand(CanExecute = nameof(IsButtonExecutable))]
         public void Update()
         {
-            if (InputID != null && !String.IsNullOrWhiteSpace(InputStudioName) && InputCountry != null)
+            if (InputID != null && InputStudioName != null && InputStudioName != "" && InputCountry != null)
             {
                 try
                 {

@@ -49,6 +49,7 @@
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="Id:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputID}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
@@ -59,8 +60,9 @@
                 <Label Grid.Row="2" Grid.Column="0" Content="Country:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding InputCountry}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
 
+                <Label Grid.Row="3" Grid.ColumnSpan="2" Content="ID will not change on update!" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontStyle="Normal" Foreground="DarkBlue" Background="PaleGreen" BorderBrush="Gray" BorderThickness="1"/>
 
-
+                <Label Grid.Row="4" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding ErrorMessage}" FontSize="18" Foreground="LightPink" Background="Azure" BorderBrush="Gray" BorderThickness="1"/>
             </Grid>
             <Button DockPanel.Dock="Top" Content="Create" FontSize="18" Padding="5" Margin="5 5 5 0" Command="{Binding CreateCommand}"/>
             <Button DockPanel.Dock="Top" Content="Update" FontSize="18" Padding="5" Margin="5 0 5 0" Command="{Binding UpdateCommand}"/>

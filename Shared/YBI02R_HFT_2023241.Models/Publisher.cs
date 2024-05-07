@@ -48,5 +48,10 @@ namespace YBI02R_HFT_2023241.Models
             StudioName = studioName;
             City = studioCity;
         }
+
+        //public override string ToString()
+        //{
+        //    return $"{Country}, {StudioName}, {StudioID}";
+        //}
     }
 }

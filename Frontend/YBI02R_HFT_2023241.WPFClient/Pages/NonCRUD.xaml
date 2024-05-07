@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YBI02R_HFT_2023241.WPFClient"
-                xmlns:vm="clr-namespace:YBI02R_HFT_2023241.WPFClient.ViewModels"
+        xmlns:vm="clr-namespace:YBI02R_HFT_2023241.WPFClient.ViewModels"
         xmlns:models="clr-namespace:YBI02R_HFT_2023241.Models;assembly=YBI02R_HFT_2023241.Models"
         WindowStartupLocation="CenterScreen"
         x:Name="NonCRUDWindow"
@@ -41,17 +41,8 @@
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="X:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputX}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <Label Grid.Row="1" Grid.Column="0" Content="Y:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding InputY}" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
+                <Label Grid.Row="0" Grid.Column="0" Content="Id:" VerticalContentAlignment="Center" FontSize="20" BorderBrush="Gray" BorderThickness="1"/>
             </Grid>
-            <Button DockPanel.Dock="Top" Content="List Song Stats" FontSize="16" Padding="5" Margin="5 5 5 0" Command="{Binding SongStatsCommand}"/>
-            <Button DockPanel.Dock="Top" Content="Songs Born Before X, Is Artist Of Y" FontSize="16" Padding="5" Margin="5 5 5 0" Command="{Binding SongsBornBeforeIsArtistCommand}"/>
-            <Button DockPanel.Dock="Top" Content="Songs Born After X, Is Artist Of Y" FontSize="16" Padding="5" Margin="5 5 5 0" Command="{Binding SongsBornAfterIsArtistCommand}"/>
-            <Button DockPanel.Dock="Top" Content="Artist With Songs More Than X" FontSize="16" Padding="5" Margin="5 5 5 0" Command="{Binding ArtistWithSongsMoreThanCommand}"/>
-            <Button DockPanel.Dock="Top" Content="Publisher With More Songs Than X" FontSize="16" Padding="5" Margin="5 5 5 0" Command="{Binding PublisherWithMoreSongsThanCommand}"/>
-            <Button DockPanel.Dock="Top" Content="Publisher With More Songs Than X And Older Than Y" FontSize="16" Padding="5" Margin="5 5 5 0" Command="{Binding PublisherWithMoreSongsThanAndOlderThanCommand}"/>
             <Button DockPanel.Dock="Bottom" Content="Return" FontSize="18" Padding="5" Margin="5 0 5 5" Command="{Binding ReturnCommand}" CommandParameter="{Binding ElementName=NonCRUDWindow}"/>
             
             <Label/>

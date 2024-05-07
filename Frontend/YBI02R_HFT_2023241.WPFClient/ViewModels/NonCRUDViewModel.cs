@@ -34,22 +34,6 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
 
         private RestService restService;
 
-        private int? inputX;
-
-        public int? InputX
-        {
-            get { return inputX; }
-            set { inputX = value; }
-        }
-
-        private int? inputY;
-
-        public int? InputY
-        {
-            get { return inputY; }
-            set { inputY = value; }
-        }
-
         private static bool IsInDesignMode
         {
             get
@@ -63,106 +47,6 @@ namespace YBI02R_HFT_2023241.WPFClient.ViewModels
             if (!IsInDesignMode)
             {
                 restService = new("http://localhost:53910/");
-            }
-        }
-
-        private bool CheckInputX()
-        {
-            return InputX != null;
-        }
-
-        private bool CheckInputY()
-        {
-            return InputY != null;
-        }
-
-        [RelayCommand]
-        public void SongsBornBeforeIsArtist()
-        {
-            if (CheckInputX() && CheckInputY())
-            {
-                Display = new();
-                List<Song> Out = restService.Get<Song>("ExtendMethodLogic/SongsBornBeforeIsArtist/" + InputX + "/" + InputY);
-                foreach (var item in Out)
-                {
-                    Display.Add(new ShowItem(item.ToString()));
-                }
-            }
-            else
-            {
-                MessageBox.Show("Wrong Input!");
-            }
-        }
-
-        [RelayCommand]
-        public void SongsBornAfterIsArtist()
-        {
-            if (CheckInputX() && CheckInputY())
-            {
-                Display = new();
-                List<Song> Out = restService.Get<Song>("ExtendMethodLogic/SongsBornAfterIsArtist/" + InputX + "/" + InputY);
-                foreach (var item in Out)
-                {
-                    Display.Add(new ShowItem(item.ToString()));
-                }
-            }
-            else
-            {
-                MessageBox.Show("Wrong Input!");
-            }
-        }
-
-        [RelayCommand]
-        public void ArtistWithSongsMoreThan()
-        {
-            if (CheckInputX() && CheckInputY())
-            {
-                Display = new();
-                List<Artist> Out = restService.Get<Artist>("ExtendMethodLogic/ArtistWithSongsMoreThan/" + InputX);
-                foreach (var item in Out)
-                {
-                    Display.Add(new ShowItem(item.ToString()));
-                }
-            }
-            else
-            {
-                MessageBox.Show("Wrong Input!");
-            }
-        }
-
-        [RelayCommand]
-        public void PublisherWithMoreSongsThan()
-        {
-            if (CheckInputX() && CheckInputY())
-            {
-                Display = new();
-                List<Publisher> Out = restService.Get<Publisher>("ExtendMethodLogic/PublisherWithMoreSongsThan/" + InputX);
-                foreach (var item in Out)
-                {
-                    Display.Add(new ShowItem(item.ToString()));
-                }
-            }
-            else
-            {
-                MessageBox.Show("Wrong Input!");
-            }
-        }
-
-        [RelayCommand]
-        public void PublisherWithMoreSongsThanAndOlderThan()
-        {
-            if (CheckInputX() && CheckInputY())
-            {
-                Display = new();
-                List<Publisher> Out = restService.Get<Publisher>("ExtendMethodLogic/PublisherWithMoreSongsThanAndOlderThan/" + InputX + "/" + InputY);
-                foreach (var item in Out)
-                {
-                    Display.Add(new ShowItem(item.ToString()));
-                }
-            }
-            else
-            {
-                MessageBox.Show("Wrong Input!");
             }
         }
 
