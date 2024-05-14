@@ -54,8 +54,9 @@ namespace YBI02R_HFT_2023241.Endpoint.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var songToDelete = logic.Read(id);
             logic.Delete(id);
-            this.hub.Clients.All.SendAsync("SongDeleted", id);
+            this.hub.Clients.All.SendAsync("SongDeleted", songToDelete);
         }
         #endregion
     }
